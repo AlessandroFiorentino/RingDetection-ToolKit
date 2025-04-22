@@ -1,36 +1,60 @@
-# Copyright (C) 2023 a.fiorentino4@studenti.unipi.it
+# Copyright (C) 2025 a.fiorentino4@studenti.unipi.it
+# For license terms see LICENSE file.
 #
-# For the license terms see the file LICENSE, distributed along with this
-# software.
+# SPDX-License-Identifier: GPL-2.0-or-later
 #
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation; either version 2 of the License, or (at your
-# option) any later version.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-# General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program; if not, write to the Free Software Foundation Inc.,
-# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+# This program is free software under GPLv2+
+# See https://www.gnu.org/licenses/gpl-2.0.html
 
-"""General utilities.
+"""Extended utilities for ring detection and analysis including:
+- HyperKamiokande-specific calculations
+- Advanced point generation methods (multiprocessing, GPU)
+- Ring metrics and quality assessment
+- Cluster processing utilities
+- Parameter tuning and analysis
+- CNN-based ring detection
+- Geometric verification methods
 """
 
-from typing import Tuple, Callable, Optional
+# ============================ IMPORTS ============================ #
+# Standard library imports
+from dataclasses import dataclass
 import math
 import multiprocessing as mp
+import sys
+import os
+import time
+import warnings
 from functools import partial
+from typing import Callable, Dict, List, Optional, Set, Tuple, Union
 
+# Third-party imports
 import numpy as np
-import pycuda.driver as drv
+import matplotlib.pyplot as plt
 from pycuda import curandom
+import pycuda.driver as drv
 from pycuda.compiler import SourceModule
+import tensorflow as tf
+from tqdm import tqdm
+from tensorflow.keras import layers, models
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-# -------------------- Constants & Detector Parameters -------------------- #
+# Go up one directory to reach utils_complete
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../RingDetectionToolKit')))
+
+# Local imports
+
+from utils_complete import (
+    sample_circles, print_circle, plot_points, plot_circle, plot_circles, fit_circle_to_points,
+    fit_circle_to_points_fast, compatible_clusters, get_color, main_procedure_adaptive,
+    find_nearest_circle, X_MIN, X_MAX, Y_MIN, Y_MAX, NUM_RINGS, MIN_DBSCAN_EPS, MAX_DBSCAN_EPS,
+    POINTS_PER_RING, RADIUS_SCATTER,
+    MIN_CLUSTERS_PER_RING, MAX_CLUSTERS_PER_RING, MIN_SAMPLES, SIGMA_THRESHOLD_RM, SIGMA_THRESHOLD,
+    S_SCALE, FITTING_PAIR_TRESHOLD, PARAMETER_NAMES
+)
+
+# ============================ CONSTANTS ============================ #
+# HyperKamiokande detector parameters
 N_H2O = 1.33           # Refractive index of water
 BETA_NU = 1            # v_neutrino / c
 
@@ -43,9 +67,51 @@ FIDUCIAL_HEIGHT = 66   # fiducial (active) height
 # Total PMTs on the detector
 TOTAL_PMTS = 20000
 
-RMAX_SCALE = 1  # Change this if you want to enlarge rmax because of non-orthogonal hits
-ALPHA = 10      # Change if you consider the discrete min radius too small
+# Ring generation and analysis defaults
+RMAX_SCALE = 1         # Scaling factor for maximum radius
+ALPHA = 10             # Scaling factor for minimum radius
+CLUSTER_CX_MIN = 0.2   # Minimum x-center for valid clusters
+CLUSTER_CX_MAX = 0.8   # Maximum x-center for valid clusters
+CLUSTER_CY_MIN = 0.2   # Minimum y-center for valid clusters
+CLUSTER_CY_MAX = 0.8   # Maximum y-center for valid clusters
+CLUSTER_CR_MIN = 0.15  # Minimum radius for valid clusters
+CLUSTER_CR_MAX = 0.8   # Maximum radius for valid clusters
+MAX_RMSE = 0.05        # Maximum allowed RMSE for valid circles
 
+# Parameter tuning defaults
+N_FT = 10              # Default number of fine-tuning runs
+SAVE_RESULTS = False   # Whether to save tuning results
+DRIVE_RESULTS_PATH = "./results"  # Path for saving results
+
+# ============================ DATA STRUCTURES ============================ #
+@dataclass
+class RatiiData:
+    """
+    Container for storing statistical and diagnostic results of parameter evaluations.
+
+    Attributes:
+        mean_ratii_x (np.ndarray): Mean values of the x-coordinate ratios across trials.
+        mean_ratii_y (np.ndarray): Mean values of the y-coordinate ratios across trials.
+        mean_ratii_r (np.ndarray): Mean values of the radius ratios across trials.
+        std_err_x (np.ndarray): Standard errors of the x-coordinate ratios.
+        std_err_y (np.ndarray): Standard errors of the y-coordinate ratios.
+        std_err_r (np.ndarray): Standard errors of the radius ratios.
+        num_nan_inf (np.ndarray): Array of dictionaries recording NaN and Inf counts per trial.
+        total_times (np.ndarray): Execution times for each evaluation.
+        efficiencies (np.ndarray): Efficiency metrics corresponding to each parameter configuration.
+    """
+    mean_ratii_x: np.ndarray
+    mean_ratii_y: np.ndarray
+    mean_ratii_r: np.ndarray
+    std_err_x: np.ndarray
+    std_err_y: np.ndarray
+    std_err_r: np.ndarray
+    num_nan_inf: np.ndarray
+    total_times: np.ndarray
+    efficiencies: np.ndarray
+
+# ============================ CORE FUNCTIONS ============================ #
+# HyperKamiokande-specific calculations
 def calculate_radii_in_kamiokande(n_h2o: float, beta_nu: float,
                    inner_diameter: float, inner_height: float,
                    fiducial_diameter: float, total_pmts: int,
@@ -123,7 +189,7 @@ def calculate_radii_in_kamiokande(n_h2o: float, beta_nu: float,
 
     return r_min, r_max, radius_scatter
 
-# ================================ Generate rings with Multiprocessing ====================
+# ================================ Point generation methods =============================
 
 def generate_ring_points(circle: np.ndarray,
                          points_per_ring: int,
@@ -169,6 +235,86 @@ def generate_ring_points(circle: np.ndarray,
 
     # Combine x and y coordinates into a single array
     return np.column_stack((x_points, y_points))
+
+def generate_rings_vectorized(circles: np.ndarray,
+                             points_per_ring: int = 500,
+                             radius_scatter: float = 0.01,
+                             bounds: Tuple[float, float, float, float] = (0, 1, 0, 1),
+                             verbose: bool = False) -> np.ndarray:
+    """
+    Vectorized generation of point clouds representing circular rings with controlled scatter.
+
+    Creates a set of points for each input circle, with points randomly distributed
+    around each ring's circumference with controlled radial variation, filtered to stay
+    within specified bounds.
+
+    Args:
+        circles (np.ndarray): Array of shape (N,3) where each row contains:
+            [x_center, y_center, radius] defining a circle
+        points_per_ring (int): Number of points to generate per circle (default: 500)
+        radius_scatter (float): Maximum radial variation from perfect circle (default: 0.01)
+            - Points are generated with radii in [radius-scatter, radius+scatter]
+            - Must be non-negative
+        bounds (Tuple): (x_min, x_max, y_min, y_max) boundaries for point filtering
+        verbose (bool): Whether to print generation statistics
+
+    Returns:
+        np.ndarray: A numpy array of (x, y) coordinates representing
+            all generated points for the rings, filtered to stay within bounds.
+
+    Raises:
+        ValueError: If input validation fails:
+            - circles array has incorrect shape (not N×3)
+            - points_per_ring is negative
+            - radius_scatter is negative
+            - invalid bounds specification
+    """
+    # Input validation
+    if circles.shape[1] != 3:
+        raise ValueError("Circles array must have shape (N,3) with columns [x,y,r]")
+    if points_per_ring < 0:
+        raise ValueError("Points per ring must be non-negative")
+    if radius_scatter < 0:
+        raise ValueError("Radius scatter must be non-negative")
+    if len(bounds) != 4 or bounds[0] >= bounds[1] or bounds[2] >= bounds[3]:
+        raise ValueError("Bounds must be (x_min, x_max, y_min, y_max) with min < max")
+
+    x_min, x_max, y_min, y_max = bounds
+    n_circles = len(circles)
+    total_points = n_circles * points_per_ring
+
+    # Generate all angles and radii at once
+    angles = np.random.uniform(0, 2*np.pi, (n_circles, points_per_ring))
+    radii = circles[:, 2][:, np.newaxis] + np.random.uniform(
+        -radius_scatter, radius_scatter, (n_circles, points_per_ring))
+
+    # Convert to Cartesian coordinates
+    x_coords = radii * np.cos(angles) + circles[:, 0][:, np.newaxis]
+    y_coords = radii * np.sin(angles) + circles[:, 1][:, np.newaxis]
+
+    # Combine and reshape
+    all_points = np.column_stack((
+        x_coords.ravel(),
+        y_coords.ravel()
+    ))
+
+    # Vectorized boundary filtering
+    in_bounds_mask = (
+        (all_points[:, 0] >= x_min) &
+        (all_points[:, 0] <= x_max) &
+        (all_points[:, 1] >= y_min) &
+        (all_points[:, 1] <= y_max))
+    filtered_points = all_points[in_bounds_mask]
+
+
+    if verbose:
+        print(f"Generated {total_points:,} points total")
+        print(f"Kept {len(filtered_points):,} points within bounds "
+              f"({len(filtered_points)/total_points:.1%})\n")
+
+    return filtered_points
+
+# ===================== Generate rings with multiprocessing =====================
 
 def generate_rings(circles: np.ndarray,
                    points_per_ring: int = 500,
@@ -324,7 +470,7 @@ def generate_rings_gpu(circles: np.ndarray,
     # Reshape output
     return points_out.reshape((total_points, 2))
 
-# ====================== Calculate rings metrics =================================
+# ====================== Ring metrics and quality assessmen ===============================
 
 def calculate_ring_metrics(points: np.ndarray,
                            circle: np.ndarray,
@@ -434,7 +580,7 @@ def calculate_average_ring_metrics(num_rings: int, points_per_ring: int = 500,
 
         # Generate points for the ring using selected method
         if use_complete_generation:
-            sample_points = generate_rings_complete(
+            sample_points = generate_rings(
                 circles=sample_circle,
                 points_per_ring=points_per_ring,
                 radius_scatter=radius_scatter
@@ -467,6 +613,8 @@ def calculate_average_ring_metrics(num_rings: int, points_per_ring: int = 500,
         print(f"Average Standard Deviation: {avg_std_dev:.4f} ± {std_std_dev:.4f}")
 
     return (avg_rmse, std_rmse), (avg_std_dev, std_std_dev)
+
+# ====================== Cluster processing utilities ===============================
 
 def post_process_clusters(labels: np.ndarray,
                             points: np.ndarray,
@@ -541,151 +689,6 @@ def post_process_clusters(labels: np.ndarray,
 
     return new_labels, cluster_count
 
-
-# ====================== Generate Rings ============================= #
-
-def generate_rings(circles: np.ndarray,
-                   points_per_ring: int = 500,
-                   radius_scatter: float = 0.01) -> np.ndarray:
-    """
-    Generates point clouds representing circular rings with controlled scatter.
-
-    Creates a set of points for each input circle, with points randomly distributed
-    around each ring's circumference with controlled radial variation.
-
-    Args:
-        circles (np.ndarray): Array of shape (N,3) where each row contains:
-            [x_center, y_center, radius] defining a circle
-        points_per_ring (int): Number of points to generate per circle (default: 500)
-        radius_scatter (float): Maximum radial variation from perfect circle (default: 0.01)
-            - Points are generated with radii in [radius-scatter, radius+scatter]
-            - Must be non-negative
-
-    Returns:
-        np.ndarray: A numpy array of (x, y) coordinates representing
-            all generated points for the rings.
-
-    Raises:
-        ValueError: If input validation fails:
-            - circles array has incorrect shape (not N×3)
-            - points_per_ring is negative
-            - radius_scatter is negative
-    """
-
-    def is_a_good_point(point: np.ndarray) -> bool:
-        """Filter function to ensure points are within the bounds [0, 1] for both x and y.
-        """
-        return point[0] >= 0 and point[0] <= 1 and point[1] >= 0 and point[1] <= 1
-
-    # Input validation
-    if circles.shape[1] != 3:
-        raise ValueError("Circles array must have shape (N,3) with columns [x,y,r]")
-    if points_per_ring < 0:
-        raise ValueError("Points per ring must be non-negative")
-    if radius_scatter < 0:
-        raise ValueError("Radius scatter must be non-negative")
-
-    x_coords_all = []
-    y_coords_all = []
-
-    for center_x, center_y, ring_radius in circles:
-        # Generate random angles and radii for the ring
-        angles = np.random.uniform(0, 2 * np.pi, points_per_ring)
-        radii = ring_radius + np.random.uniform(-radius_scatter, radius_scatter, points_per_ring)
-
-        # Convert polar coordinates to Cartesian coordinates
-        x_coords = radii * np.cos(angles) + center_x
-        y_coords = radii * np.sin(angles) + center_y
-
-        x_coords_all.append(x_coords)
-        y_coords_all.append(y_coords)
-
-    # Concatenate all coordinates into single numpy arrays
-    x_coords_all = np.concatenate(x_coords_all)
-    y_coords_all = np.concatenate(y_coords_all)
-    all_points = np.column_stack((x_coords_all, y_coords_all))
-
-    # Filter points if a filter function is provided
-    return np.array(list(filter(is_a_good_point, all_points)))
-
-def generate_rings_vectorized(circles: np.ndarray,
-                             points_per_ring: int = 500,
-                             radius_scatter: float = 0.01,
-                             bounds: Tuple[float, float, float, float] = (0, 1, 0, 1),
-                             verbose: bool = False) -> np.ndarray:
-    """
-    Vectorized generation of point clouds representing circular rings with controlled scatter.
-
-    Creates a set of points for each input circle, with points randomly distributed
-    around each ring's circumference with controlled radial variation, filtered to stay
-    within specified bounds.
-
-    Args:
-        circles (np.ndarray): Array of shape (N,3) where each row contains:
-            [x_center, y_center, radius] defining a circle
-        points_per_ring (int): Number of points to generate per circle (default: 500)
-        radius_scatter (float): Maximum radial variation from perfect circle (default: 0.01)
-            - Points are generated with radii in [radius-scatter, radius+scatter]
-            - Must be non-negative
-        bounds (Tuple): (x_min, x_max, y_min, y_max) boundaries for point filtering
-        verbose (bool): Whether to print generation statistics
-
-    Returns:
-        np.ndarray: A numpy array of (x, y) coordinates representing
-            all generated points for the rings, filtered to stay within bounds.
-
-    Raises:
-        ValueError: If input validation fails:
-            - circles array has incorrect shape (not N×3)
-            - points_per_ring is negative
-            - radius_scatter is negative
-            - invalid bounds specification
-    """
-    # Input validation
-    if circles.shape[1] != 3:
-        raise ValueError("Circles array must have shape (N,3) with columns [x,y,r]")
-    if points_per_ring < 0:
-        raise ValueError("Points per ring must be non-negative")
-    if radius_scatter < 0:
-        raise ValueError("Radius scatter must be non-negative")
-    if len(bounds) != 4 or bounds[0] >= bounds[1] or bounds[2] >= bounds[3]:
-        raise ValueError("Bounds must be (x_min, x_max, y_min, y_max) with min < max")
-
-    x_min, x_max, y_min, y_max = bounds
-    n_circles = len(circles)
-    total_points = n_circles * points_per_ring
-
-    # Generate all angles and radii at once
-    angles = np.random.uniform(0, 2*np.pi, (n_circles, points_per_ring))
-    radii = circles[:, 2][:, np.newaxis] + np.random.uniform(
-        -radius_scatter, radius_scatter, (n_circles, points_per_ring))
-
-    # Convert to Cartesian coordinates
-    x_coords = radii * np.cos(angles) + circles[:, 0][:, np.newaxis]
-    y_coords = radii * np.sin(angles) + circles[:, 1][:, np.newaxis]
-
-    # Combine and reshape
-    all_points = np.column_stack((
-        x_coords.ravel(),
-        y_coords.ravel()
-    ))
-
-    # Vectorized boundary filtering
-    in_bounds_mask = (
-        (all_points[:, 0] >= x_min) &
-        (all_points[:, 0] <= x_max) &
-        (all_points[:, 1] >= y_min) &
-        (all_points[:, 1] <= y_max))
-    filtered_points = all_points[in_bounds_mask]
-
-
-    if verbose:
-        print(f"Generated {total_points:,} points total")
-        print(f"Kept {len(filtered_points):,} points within bounds "
-              f"({len(filtered_points)/total_points:.1%})\n")
-
-    return filtered_points
-
 def fit_circles_to_clusters_fast(cluster_dict: Dict[int, Dict],
                             verbose: bool = False
                             ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
@@ -743,28 +746,11 @@ def fit_circles_to_clusters_fast(cluster_dict: Dict[int, Dict],
         })
 
 def merge_clusters(cdict: Dict[int, Dict[str, Union[np.ndarray, bool, float]]],
-                  keys: List[int],
-                  verbose: bool = False) -> Optional[Dict[str, Union[np.ndarray, bool, float]]]:
+                   keys: List[int],
+                   verbose: bool = False) -> Optional[Dict[str, Union[np.ndarray, bool, float]]]:
     """
     Merges multiple clusters into a single cluster by fitting a new circle to their combined points.
-
-    Args:
-        cdict: Cluster dictionary where keys are cluster IDs and values contain:
-               - 'points': np.ndarray of cluster points
-               - 'circle': np.ndarray of fitted circle parameters [x, y, r]
-               - 'errors': np.ndarray of fitting errors [err_x, err_y, err_r]
-               - 'rmse': float of fitting RMSE
-               - 'valid': bool indicating cluster validity
-        keys: List of cluster IDs to merge
-        verbose: Whether to print progress information (default: False)
-
-    Returns:
-        Dictionary with merged cluster information or None if merge failed.
-        Contains same keys as input clusters with updated values.
-
-    Raises:
-        KeyError: If any cluster ID in keys is not found in cdict
-        ValueError: If keys list is empty
+    ...
     """
 
     # Input validation
@@ -778,36 +764,38 @@ def merge_clusters(cdict: Dict[int, Dict[str, Union[np.ndarray, bool, float]]],
         if verbose:
             print(f"No need to merge cluster {keys}")
         return cdict[keys[0]].copy()
-    else:
-        # merge points
-        points = np.vstack([cdict[k]['points'] for k in keys])
 
-        # fit circle to points
-        fit_result = fit_circle_to_points(points)
+    # merge points
+    points = np.vstack([cdict[k]['points'] for k in keys])
 
-        # check result
-        if fit_result is None:
-            if verbose:
-                print(f"Failed to merge clusters {keys}")
-            return None
-        else:
-            if verbose:
-                print(f"Merged clusters {keys} into a new cluster")
+    # fit circle to points
+    fit_result = fit_circle_to_points(points)
 
-            # unpack fit results
-            new_circle, new_errors, new_rmse = fit_result
+    # check result
+    if fit_result is None:
+        if verbose:
+            print(f"Failed to merge clusters {keys}")
+        return None
 
-            if verbose:
-                print(f"Successfully merged clusters {keys}")
-                print(f"New circle: center=({new_circle[0]:.3f}, {new_circle[1]:.3f}), radius={new_circle[2]:.3f}")
+    if verbose:
+        print(f"Merged clusters {keys} into a new cluster")
 
-            return {
-                'points': points,
-                'circle': new_circle,
-                'errors': new_errors,
-                'rmse': new_rmse,
-                'valid': True
-            }
+    # unpack fit results
+    new_circle, new_errors, new_rmse = fit_result
+
+    if verbose:
+        print(f"Successfully merged clusters {keys}")
+        print(f"New circle: center=({new_circle[0]:.3f},"
+              f"{new_circle[1]:.3f}), radius={new_circle[2]:.3f}")
+
+    return {
+        'points': points,
+        'circle': new_circle,
+        'errors': new_errors,
+        'rmse': new_rmse,
+        'valid': True
+    }
+
 
 def compare_and_merge_clusters_2(cluster_dict: Dict[int, Dict],
                                sigma: float = 3.0,
@@ -855,11 +843,13 @@ def compare_and_merge_clusters_2(cluster_dict: Dict[int, Dict],
         # Compare with other clusters
         for other_key in sorted_keys:
             other_cluster = merged_dict[other_key]
-            if not other_cluster['valid'] or other_key <= current_key or other_key in processed_keys:
+            if not (other_cluster['valid'] or other_key <= current_key
+                    or other_key in processed_keys):
                 continue
 
             # Check compatibility
-            are_compatible = compatible_clusters(merged_dict, current_key, other_key, sigma, verbose)
+            are_compatible = compatible_clusters(merged_dict, current_key,
+                                                 other_key, sigma, verbose)
 
             if verbose:
                 print(f"Clusters {current_key} and {other_key} are compatible? {are_compatible}")
@@ -872,12 +862,11 @@ def compare_and_merge_clusters_2(cluster_dict: Dict[int, Dict],
                 if merged_cluster is None or merged_cluster['rmse'] >= current_cluster['rmse']:
                     # Skip other cluster if no fit or rmse does not improve
                     continue
-                else:
-                    # Accept merge
-                    current_cluster.update(merged_cluster)
 
-                    # append other_key to merged_keys
-                    merged_keys.append(other_key)
+                # Accept merge
+                current_cluster.update(merged_cluster)
+                # append other_key to merged_keys
+                merged_keys.append(other_key)
 
         if len(merged_keys) == 1:
             current_cluster['merged_from'] = None
@@ -886,7 +875,7 @@ def compare_and_merge_clusters_2(cluster_dict: Dict[int, Dict],
         else:
 
             # get maximum rmse from ccompatible clusters
-            max_rmse = max([merged_dict[k]['rmse'] for k in merged_keys])
+            max_rmse = max(merged_dict[k]['rmse'] for k in merged_keys)
 
             # merge clusters
             merged_cluster = merge_clusters(merged_dict, merged_keys, verbose)
@@ -895,9 +884,9 @@ def compare_and_merge_clusters_2(cluster_dict: Dict[int, Dict],
             if merged_cluster is None or merged_cluster['rmse'] >= max_rmse:
                 # skip current cluster if no fit or rmse does not improve
                 continue
-            else:
-                # accept merge
-                current_cluster.update(merged_cluster)
+
+            # accept merge
+            current_cluster.update(merged_cluster)
 
 
             current_cluster['merged_from'] = merged_keys
@@ -911,34 +900,8 @@ def compare_and_merge_clusters_2(cluster_dict: Dict[int, Dict],
         processed_keys.update(merged_keys)
 
     return merged_dict
-# ============================ DATA STRUCTURES ============================ #
-@dataclass
-class RatiiData:
-    """
-    Container for storing statistical and diagnostic results of parameter evaluations.
 
-    Attributes:
-        mean_ratii_x (np.ndarray): Mean values of the x-coordinate ratios across trials.
-        mean_ratii_y (np.ndarray): Mean values of the y-coordinate ratios across trials.
-        mean_ratii_r (np.ndarray): Mean values of the radius ratios across trials.
-        std_err_x (np.ndarray): Standard errors of the x-coordinate ratios.
-        std_err_y (np.ndarray): Standard errors of the y-coordinate ratios.
-        std_err_r (np.ndarray): Standard errors of the radius ratios.
-        num_nan_inf (np.ndarray): Array of dictionaries recording NaN and Inf counts per trial.
-        total_times (np.ndarray): Execution times for each evaluation.
-        efficiencies (np.ndarray): Efficiency metrics corresponding to each parameter configuration.
-    """
-    mean_ratii_x: np.ndarray
-    mean_ratii_y: np.ndarray
-    mean_ratii_r: np.ndarray
-    std_err_x: np.ndarray
-    std_err_y: np.ndarray
-    std_err_r: np.ndarray
-    num_nan_inf: np.ndarray
-    total_times: np.ndarray
-    efficiencies: np.ndarray
-
-# ============================ CORE FUNCTIONS ============================ #
+# ============================ Parameter tuning and analysis ============================ #
 
 def update_parameter_value(parameter_name: str,
                          param_value: Union[int, float]) -> None:
@@ -1240,7 +1203,7 @@ def run_fine_tuning(parameter_name: str,
             std_err_x, std_err_y, std_err_r,
             num_nan_inf, all_results, total_times, efficiencies)
 
-# ============================ VISUALIZATION ============================ #
+# ============================ Visualization and reporting ============================ #
 
 def plot_mean_ratii_vs_parameter(parameter_values: np.ndarray,
                                 ratii_data: RatiiData,
@@ -1400,140 +1363,6 @@ def print_nan_inf_counts(num_nan_inf_: List[Dict[str, Union[float, int]]]) -> No
         # Print an empty line for better readability between entries
         print()
 
-# ============================ HERE IS THE MAIN============================ #
-
-if __name__ == "__main__":
-
-    # Extended parameter configuration
-    PARAMETER_NAMES = [
-        "S_SCALE", "SIGMA_THRESHOLD", "SIGMA_THRESHOLD_RM", "MIN_SAMPLES",
-        "MIN_CLUSTERS_PER_RING", "MAX_CLUSTERS_PER_RING", "NUM_RINGS",
-        "POINTS_PER_RING", "RADIUS_SCATTER", "R_MIN", "R_MAX"
-    ]
-
-    # Default ranges for each parameter
-    PARAMETER_STARTS =[1.2, 1.0,  1.0,   5, 2, 3, 1, 100, 0.01,  0.1,  0.2]
-    PARAMETER_ENDS =  [2.0, 10.0, 10.0, 15, 6, 8, 3, 500, 0.2,   0.7,  0.8]
-    PARAMETER_STEPS = [0.1, 1.0,  1.0,   1, 1, 1, 1, 50,  0.01, 0.05, 0.05]
-
-    PARAMETER_INDEX = 0  # Index of parameter to tune, a number from 0 to 10
-    PARAMETER_TO_TUNE = PARAMETER_NAMES[PARAMETER_INDEX]
-    PARAMETER_START = PARAMETER_STARTS[PARAMETER_INDEX]
-    PARAMETER_END = PARAMETER_ENDS[PARAMETER_INDEX]
-    PARAMETER_STEP = PARAMETER_STEPS[PARAMETER_INDEX]
-
-    PARAMETER_VALUES = np.linspace(PARAMETER_START, PARAMETER_END,
-                                   num=int((PARAMETER_END - PARAMETER_START) / PARAMETER_STEP) + 1)
-
-    # Run fine-tuning and get results
-    (
-    mean_ratii_x_res, mean_ratii_y_res, mean_ratii_r_res, std_dev_x_res, std_dev_y_res,
-    std_dev_r_res, std_err_x_res, std_err_y_res, std_err_r_res, num_nan_inf_res, all_results_res,
-    total_times_res, efficiencies_res
-    ) = run_fine_tuning(PARAMETER_TO_TUNE, PARAMETER_VALUES, N_FT, verbose=True)
-
-    mean_ratii_x_a= np.array(mean_ratii_x_res)
-    mean_ratii_y_a= np.array(mean_ratii_y_res)
-    mean_ratii_r_a= np.array(mean_ratii_r_res)
-
-    # Print the number of NaN and inf values for each parameter value
-    #print_nan_inf_counts(num_nan_inf_res)
-
-    ratii_da = RatiiData(
-    mean_ratii_x=mean_ratii_x_a,
-    mean_ratii_y=mean_ratii_y_a,
-    mean_ratii_r=mean_ratii_r_a,
-    std_err_x=np.array(std_err_x_res),
-    std_err_y=np.array(std_err_y_res),
-    std_err_r=np.array(std_err_r_res),
-    num_nan_inf=np.array(num_nan_inf_res),
-    total_times=np.array(total_times_res),
-    efficiencies=np.array(efficiencies_res)
-    )
-
-    # Plot the results
-    plot_mean_ratii_vs_parameter(PARAMETER_VALUES, ratii_da, PARAMETER_TO_TUNE,
-                                save_plot=SAVE_RESULTS)
-
-    # Save results summary if requested
-    if SAVE_RESULTS:
-        RESULTS_FILENAME = os.path.join(DRIVE_RESULTS_PATH, f"results_{PARAMETER_TO_TUNE}.txt")
-        with open(RESULTS_FILENAME, 'w', encoding='utf-8') as f:
-            # Write header with timestamp
-            f.write(f"Analysis completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-
-            # Write all current parameter values
-            f.write("=== CURRENT PARAMETER VALUES ===\n")
-            params = get_current_parameters()
-            for name, value in params.items():
-                if isinstance(value, float):
-                    f.write(f"{name}: {value:.3f}\n")
-                else:
-                    f.write(f"{name}: {value}\n")
-
-            # Write tuning information
-            f.write("\n=== TUNING INFORMATION ===\n")
-            f.write(f"Parameter Tuned: {PARAMETER_TO_TUNE}\n")
-            f.write(f"Parameter Values Tested: {PARAMETER_VALUES}\n")
-            f.write(f"Number of Seeds per Value: {N_FT}\n\n")
-
-            # Write summary statistics
-            f.write("=== SUMMARY STATISTICS ===\n")
-            f.write(f"Total Elapsed Time: {np.sum(total_times_res):.2f} seconds\n")
-            f.write(f"Average Time per Seed: {np.mean(total_times_res)/N_FT:.2f} seconds\n")
-            f.write(f"Average Efficiency: {np.mean(efficiencies_res):.2f}%\n\n")
-
-            # Write detailed results
-            f.write("=== DETAILED RESULTS ===\n")
-            for idx, param_val in enumerate(PARAMETER_VALUES):
-                f.write(f"\nValue: {param_val}\n")
-                f.write(
-                    f"Mean Ratii:\n X: {mean_ratii_x_res[idx]:.3f} ± {std_err_x_res[idx]:.3f}\n "
-                    f"Y: {mean_ratii_y_res[idx]:.3f} ± {std_err_y_res[idx]:.3f} \n "
-                    f"R: {mean_ratii_r_res[idx]:.3f} ± {std_err_r_res[idx]:.3f}\n"
-                )
-                f.write(f"Efficiency: {efficiencies_res[idx]:.2f}%\n")
-                f.write(f"Time: {total_times_res[idx]:.2f}s\n")
-
-        print(f"\nResults summary saved to {RESULTS_FILENAME}")
-
-    # Call at the end of your simulation
-    print("\n🎉 SIMULATION COMPLETE! 🎉")
-# ============================ IMPORTS ============================ #
-
-# Standard library imports
-from typing import Tuple
-import warnings
-
-# Third-party imports
-import numpy as np
-import matplotlib.pyplot as plt
-import tensorflow as tf
-from tensorflow.keras import layers, models
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
-
-# ============================ EXPORT LIST ============================ #
-__all__ = [
-    # Data generation
-    'generate_circles',
-    'generate_rings',
-
-    # Core functions for the CNN
-    'points_to_image',
-    'image_to_points',
-    'create_dataset',
-    'build_cnn',
-    'train_cnn',
-    'predict_rings',
-    'test_cnn_efficiency'
-]
-
-# ============================ CONSTANTS ============================ #
-DEFAULT_IMG_SIZE = (64, 64)          # Default image dimensions (height, width)
-DEFAULT_POINTS_PER_RING = 500        # Default points per generated ring
-DEFAULT_MAX_CIRCLES = 3              # Default maximum number of circles to classify
-DEFAULT_BATCH_SIZE = 32              # Default training batch size
-DEFAULT_EPOCHS = 20                  # Default training epochs
 
 # ============================ DATA GENERATION ============================ #
 
@@ -1648,7 +1477,7 @@ def generate_rings(circles: np.ndarray,
     # Filter points if a filter function is provided
     return np.array(list(filter(is_a_good_point, all_points)))
 
-# ============================ CORE FUNCTIONS FOR THE CNN============================ #
+# ============================ CNN-based ring detection ============================ #
 
 def points_to_image(points: np.ndarray,
                     img_size: Tuple[int, int] = (64, 64)) -> np.ndarray:
@@ -2059,12 +1888,13 @@ def test_cnn_efficiency(model: tf.keras.Model,
 
     return accuracy
 
-def ptolemy_check(A: Tuple[float, float],
-                  B: Tuple[float, float],
-                  C: Tuple[float, float],
-                  D: Tuple[float, float],
-                  rtol: float = 1e-3) -> bool:
+# =========================== Geometric verification methods  =====================
 
+def ptolemy_check(point_a: Tuple[float, float],
+                  point_b: Tuple[float, float],
+                  point_c: Tuple[float, float],
+                  point_d: Tuple[float, float],
+                  rtol: float = 1e-3) -> bool:
     """
     Check if four points in a plane satisfy Ptolemy's inequality as an equality.
 
@@ -2073,27 +1903,28 @@ def ptolemy_check(A: Tuple[float, float],
     (lie on the same circle in order A-B-C-D or any cyclic permutation).
 
     Args:
-        A, B, C, D: 1D numpy arrays representing 2D points (x,y coordinates)
+        point_a, point_b, point_c, point_d: Tuples representing 2D points (x, y coordinates)
         rtol: Relative tolerance for floating point comparison
 
     Returns:
         bool: True if the points satisfy AC * BD ≈ AB * CD + BC * DA within tolerance
     """
     # Calculate all pairwise distances between points
-    AC = np.linalg.norm(A - C)
-    BD = np.linalg.norm(B - D)
-    AB = np.linalg.norm(A - B)
-    BC = np.linalg.norm(B - C)
-    CD = np.linalg.norm(C - D)
-    DA = np.linalg.norm(D - A)
+    dist_ac = np.linalg.norm(point_a - point_c)
+    dist_bd = np.linalg.norm(point_b - point_d)
+    dist_ab = np.linalg.norm(point_a - point_b)
+    dist_bc = np.linalg.norm(point_b - point_c)
+    dist_cd = np.linalg.norm(point_c - point_d)
+    dist_da = np.linalg.norm(point_d - point_a)
 
     # Check if the product of diagonals equals the sum of products of opposite sides
-    return np.isclose(AC * BD, AB * CD + BC * DA, rtol=rtol)
+    return np.isclose(dist_ac * dist_bd, dist_ab * dist_cd + dist_bc * dist_da, rtol=rtol)
 
-def fit_circle_to_four_points(A: Tuple[float, float],
-                              B: Tuple[float, float],
-                              C: Tuple[float, float],
-                              D: Tuple[float, float],
+
+def fit_circle_to_four_points(point_a: Tuple[float, float],
+                              point_b: Tuple[float, float],
+                              point_c: Tuple[float, float],
+                              point_d: Tuple[float, float],
                               tolerance: float = 1e-6
                               ) -> Optional[Tuple[List[float], float]]:
     """
@@ -2109,33 +1940,38 @@ def fit_circle_to_four_points(A: Tuple[float, float],
         Returns None if the points are nearly collinear.
     """
     # Extract coordinates of the points
-    x1, y1 = A
-    x2, y2 = B
-    x3, y3 = C
-    x4, y4 = D
+    x_1, y_1 = point_a
+    x_2, y_2 = point_b
+    x_3, y_3 = point_c
+    x_4, y_4 = point_d
 
     # Calculate the determinant of the matrix (to check for collinearity)
-    determinant = (x1 - x3) * (y2 - y3) - (y1 - y3) * (x2 - x3)
+    determinant = (x_1 - x_3) * (y_2 - y_3) - (y_1 - y_3) * (x_2 - x_3)
 
     # If the determinant is near zero, the points are nearly collinear
     if abs(determinant) < tolerance:
         return None  # Return None to indicate invalid input (collinear points)
 
     # Calculate the center of the circle using coordinate geometry formulas
-    center_x = ((x1**2 + y1**2) * (y2 - y3) + (x2**2 + y2**2) * (y3 - y1) + (x3**2 + y3**2) * (y1 - y2)) / (2 * determinant)
-    center_y = ((x1**2 + y1**2) * (x3 - x2) + (x2**2 + y2**2) * (x1 - x3) + (x3**2 + y3**2) * (x2 - x1)) / (2 * determinant)
+    center_x = ((x_1**2 + y_1**2) * (y_2 - y_3) +
+                (x_2**2 + y_2**2) * (y_3 - y_1) +
+                (x_3**2 + y_3**2) * (y_1 - y_2)) / (2 * determinant)
+    center_y = ((x_1**2 + y_1**2) * (x_3 - x_2) +
+                (x_2**2 + y_2**2) * (x_1 - x_3) +
+                (x_3**2 + y_3**2) * (x_2 - x_1)) / (2 * determinant)
 
     # Calculate the radius for each point
-    radius1 = np.sqrt((center_x - x1)**2 + (center_y - y1)**2)
-    radius2 = np.sqrt((center_x - x2)**2 + (center_y - y2)**2)
-    radius3 = np.sqrt((center_x - x3)**2 + (center_y - y3)**2)
-    radius4 = np.sqrt((center_x - x4)**2 + (center_y - y4)**2)
+    radius1 = np.sqrt((center_x - x_1)**2 + (center_y - y_1)**2)
+    radius2 = np.sqrt((center_x - x_2)**2 + (center_y - y_2)**2)
+    radius3 = np.sqrt((center_x - x_3)**2 + (center_y - y_3)**2)
+    radius4 = np.sqrt((center_x - x_4)**2 + (center_y - y_4)**2)
 
     # Calculate the average radius
     radius = np.mean([radius1, radius2, radius3, radius4])
 
     # Calculate the Root Mean Square Error (RMSE) of the fit
-    rmse = np.sqrt(np.mean([(radius - radius1)**2, (radius - radius2)**2, (radius - radius3)**2, (radius - radius4)**2]))
+    rmse = np.sqrt(np.mean([(radius - radius1)**2, (radius - radius2)**2,
+                            (radius - radius3)**2, (radius - radius4)**2]))
 
     # Return the circle parameters and RMSE
     return [center_x, center_y, radius], rmse
@@ -2188,27 +2024,27 @@ def count_points_on_circle(points: List[List[float]],
     points = np.array(points)
 
     # Extract circle parameters (center and radius)
-    cx, cy, r = circle
+    c_x, c_y, radius = circle
 
     # Calculate the Euclidean distance from the circle's center to each point
-    distances = np.linalg.norm(points - [cx, cy], axis=1)
+    distances = np.linalg.norm(points - [c_x, c_y], axis=1)
 
     # Find points that are within the tolerance of the circle's radius
-    compatible_points_mask = np.abs(distances - r) <= atol
+    compatible_points_mask = np.abs(distances - radius) <= atol
     compatible_points = points[compatible_points_mask]  # Extract compatible points
     num_compatible_points = len(compatible_points)  # Count compatible points
 
     # Calculate RMSE only for compatible points
     if num_compatible_points > 0:
-        residuals = distances[compatible_points_mask] - r  # Residuals (distance errors)
+        residuals = distances[compatible_points_mask] - radius  # Residuals (distance errors)
         rmse = np.sqrt(np.mean(residuals**2))  # Root Mean Square Error
     else:
         rmse = np.nan  # Return NaN if no compatible points are found
 
     return num_compatible_points, rmse
 
-def process_points(points: np.ndarray, 
-                   k: int, 
+def process_points(points: np.ndarray,
+                   k: int,
                    min_points: int = 0) -> None:
     """
     Attempt to detect circles within a set of 2D points by:
@@ -2221,7 +2057,8 @@ def process_points(points: np.ndarray,
     Args:
         points (np.ndarray): An array of shape (N, 2) containing 2D (x, y) coordinates.
         k (int): Number of random samples (sets of 4 points) to draw and evaluate.
-        min_points (int, optional): Minimum number of compatible points required to accept a detected circle. Defaults to 0.
+        min_points (int, optional): Minimum number of compatible points required to
+            accept a detected circle. Defaults to 0.
 
     Returns:
         None. Prints diagnostic information and plots visualizations.
@@ -2239,15 +2076,15 @@ def process_points(points: np.ndarray,
     for i in range(k):
         # Randomly select 4 distinct points
         indices = np.random.choice(len(points), size=4, replace=False)
-        A, B, C, D = points[indices]
+        point_a, point_b, point_c, point_d = points[indices]
 
         # Step 1: Check Ptolemy’s theorem (necessary for a cyclic quadrilateral)
-        if not ptolemy_check(A, B, C, D):
+        if not ptolemy_check(point_a, point_b, point_c, point_d):
             continue
         print(f"\nPtolemy's Theorem satisfied for points {indices}")
 
         # Step 2: Fit a circle to the 4 points
-        result = fit_circle_to_four_points(A, B, C, D)
+        result = fit_circle_to_four_points(point_a, point_b, point_c, point_d)
         if result is None:
             continue
 
@@ -2289,6 +2126,7 @@ def process_points(points: np.ndarray,
     print("\nIndices of detected circles:", found_circles)
     print(f"Unique circles found: {set(found_circles)}")
 
+
 def plot_quadrilateral_and_circle(points: List[np.ndarray], color: str = 'red') -> None:
     """
     Plots a quadrilateral formed by 4 points, its diagonals, and its circumcircle.
@@ -2312,15 +2150,15 @@ def plot_quadrilateral_and_circle(points: List[np.ndarray], color: str = 'red') 
         return
 
     # Extract x and y coordinates
-    x = [p[0] for p in points]
-    y = [p[1] for p in points]
+    point_x = [p[0] for p in points]
+    point_y = [p[1] for p in points]
 
     # Plot the quadrilateral
-    plt.plot(x + [x[0]], y + [y[0]], linestyle='-', markersize=8)
+    plt.plot(point_x + [point_x[0]], point_y + [point_y[0]], linestyle='-', markersize=8)
 
     # Plot the diagonals
-    plt.plot([x[0], x[2]], [y[0], y[2]], linestyle='--', color=color)
-    plt.plot([x[1], x[3]], [y[1], y[3]], linestyle='--', color=color)
+    plt.plot([point_x[0], point_x[2]], [point_y[0], point_y[2]], linestyle='--', color=color)
+    plt.plot([point_x[1], point_x[3]], [point_y[1], point_y[3]], linestyle='--', color=color)
 
     # Compute the circumcircle (center and radius)
     center, radius = circumcircle(points)
@@ -2350,28 +2188,27 @@ def circumcircle(points: List[np.ndarray]) -> Tuple[Tuple[float, float], float]:
             - radius: Radius of the circumcircle.
     """
     # Extract coordinates of the first three points
-    x1, y1 = points[0]
-    x2, y2 = points[1]
-    x3, y3 = points[2]
-    x4, y4 = points[3]  # Not used in calculation
+    x_1, y_1 = points[0]
+    x_2, y_2 = points[1]
+    x_3, y_3 = points[2]
 
     # Compute determinant to check collinearity and prepare for the formula
-    determinant = (x1 - x3) * (y2 - y3) - (y1 - y3) * (x2 - x3)
+    determinant = (x_1 - x_3) * (y_2 - y_3) - (y_1 - y_3) * (x_2 - x_3)
     if abs(determinant) < 1e-6:
         # If determinant is very small, points are almost collinear
         print("Warning: Points are nearly collinear. Circumcircle might not be accurate.")
         determinant = 1e-6
 
     # Apply the coordinate geometry formula to find the circumcenter
-    center_x = ((x1**2 + y1**2) * (y2 - y3) +
-                (x2**2 + y2**2) * (y3 - y1) +
-                (x3**2 + y3**2) * (y1 - y2)) / (2 * determinant)
+    center_x = ((x_1**2 + y_1**2) * (y_2 - y_3) +
+                (x_2**2 + y_2**2) * (y_3 - y_1) +
+                (x_3**2 + y_3**2) * (y_1 - y_2)) / (2 * determinant)
 
-    center_y = ((x1**2 + y1**2) * (x3 - x2) +
-                (x2**2 + y2**2) * (x1 - x3) +
-                (x3**2 + y3**2) * (x2 - x1)) / (2 * determinant)
+    center_y = ((x_1**2 + y_1**2) * (x_3 - x_2) +
+                (x_2**2 + y_2**2) * (x_1 - x_3) +
+                (x_3**2 + y_3**2) * (x_2 - x_1)) / (2 * determinant)
 
     # Compute radius using distance from center to one of the points
-    radius = np.sqrt((center_x - x1)**2 + (center_y - y1)**2)
+    radius = np.sqrt((center_x - x_1)**2 + (center_y - y_1)**2)
 
     return (center_x, center_y), radius

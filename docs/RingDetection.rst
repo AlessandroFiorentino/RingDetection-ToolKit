@@ -1,7 +1,10 @@
-Ring Detection Documentation
-====================================
+Ring Detection documentation
+============================
 
-.. automodule:: utils_complete
+.. automodule:: ringdetection
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. toctree::
+   :maxdepth: 2

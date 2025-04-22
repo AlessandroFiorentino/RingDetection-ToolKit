@@ -1,0 +1,106 @@
+Analysis completed at: 2025-04-15 15:58:29
+
+=== CURRENT PARAMETER VALUES ===
+NUM_RINGS: 3
+X_MIN: 0.200
+X_MAX: 0.800
+Y_MIN: 0.200
+Y_MAX: 0.800
+R_MIN: 0.165
+R_MAX: 0.643
+POINTS_PER_RING: 500
+RADIUS_SCATTER: 0.010
+MIN_DBSCAN_EPS: 0.001
+MAX_DBSCAN_EPS: 1
+MIN_CLUSTERS_PER_RING: 3
+MAX_CLUSTERS_PER_RING: 4
+MIN_SAMPLES: 7
+SIGMA_THRESHOLD_RM: 2.000
+SIGMA_THRESHOLD: 2.000
+S_SCALE: 2.000
+FITTING_PAIR_TRESHOLD: 20
+N_FT: 500
+
+=== TUNING INFORMATION ===
+Parameter Tuned: S_SCALE
+Parameter Values Tested: [1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2. ]
+Number of Seeds per Value: 500
+
+=== SUMMARY STATISTICS ===
+Total Elapsed Time: 1780.27 seconds
+Average Time per Seed: 0.40 seconds
+Average Efficiency: 90.65%
+
+=== DETAILED RESULTS ===
+
+Value: 1.2
+Mean Ratii:
+ X: 2.587 ± 0.101
+ Y: 2.453 ± 0.094 
+ R: 2.585 ± 0.095
+Efficiency: 92.13%
+Time: 204.19s
+
+Value: 1.3
+Mean Ratii:
+ X: 2.482 ± 0.096
+ Y: 2.427 ± 0.097 
+ R: 2.558 ± 0.099
+Efficiency: 92.33%
+Time: 196.28s
+
+Value: 1.4
+Mean Ratii:
+ X: 2.490 ± 0.116
+ Y: 2.388 ± 0.098 
+ R: 2.474 ± 0.094
+Efficiency: 92.20%
+Time: 197.76s
+
+Value: 1.5
+Mean Ratii:
+ X: 2.345 ± 0.091
+ Y: 2.304 ± 0.100 
+ R: 2.368 ± 0.087
+Efficiency: 90.87%
+Time: 199.36s
+
+Value: 1.6
+Mean Ratii:
+ X: 2.349 ± 0.091
+ Y: 2.291 ± 0.096 
+ R: 2.387 ± 0.088
+Efficiency: 90.20%
+Time: 196.24s
+
+Value: 1.7
+Mean Ratii:
+ X: 2.354 ± 0.092
+ Y: 2.273 ± 0.089 
+ R: 2.404 ± 0.088
+Efficiency: 89.60%
+Time: 196.74s
+
+Value: 1.8
+Mean Ratii:
+ X: 2.365 ± 0.092
+ Y: 2.353 ± 0.099 
+ R: 2.486 ± 0.096
+Efficiency: 89.53%
+Time: 197.18s
+
+Value: 1.9
+Mean Ratii:
+ X: 2.347 ± 0.091
+ Y: 2.267 ± 0.092 
+ R: 2.444 ± 0.095
+Efficiency: 89.60%
+Time: 195.67s
+
+Value: 2.0
+Mean Ratii:
+ X: 2.432 ± 0.108
+ Y: 2.259 ± 0.087 
+ R: 2.451 ± 0.094
+Efficiency: 89.40%
+Time: 196.84s

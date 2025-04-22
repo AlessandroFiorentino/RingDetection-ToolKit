@@ -1,7 +1,7 @@
-.. utils_complete.py documentation master file, created by
+.. ringdetection.py documentation master file, created by
    sphinx-quickstart on Sat Apr 12 11:38:37 2025.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+   You can adapt this file to your liking, but it should at least
+   contain the root 'toctree' directive.
 
 Welcome to Ring Detection Toolkit's documentation!
 ==================================================
@@ -10,6 +10,7 @@ Welcome to Ring Detection Toolkit's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   main
    install
    RingDetection
 

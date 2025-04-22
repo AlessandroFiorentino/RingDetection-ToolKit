@@ -7,12 +7,12 @@
 # See https://www.gnu.org/licenses/gpl-2.0.html
 
 """
-Complete Ring Detection and Analysis Toolkit
+Ring Detection and Analysis Toolkit
 
 This comprehensive module provides all core functionality for:
 
 - Synthetic data generation and simulation
-- Advanced clustering algorithms
+- Adaptive clustering algorithms
 - Circle fitting and geometric analysis
 - Visualization and reporting tools
 - Performance evaluation and metrics
@@ -275,9 +275,9 @@ def calculate_and_print_statistics(ratii_x_array: np.ndarray,
 
     # Print the results
     print("\nStatistics for Ratii:")
-    print(f"Ratio X: Mean = {mean_x:.6f}, Std Dev = {std_x:.6f}, SEM = {sem_x:.6f}")
-    print(f"Ratio Y: Mean = {mean_y:.6f}, Std Dev = {std_y:.6f}, SEM = {sem_y:.6f}")
-    print(f"Ratio R: Mean = {mean_r:.6f}, Std Dev = {std_r:.6f}, SEM = {sem_r:.6f}")
+    print(f"Ratio X: Mean = {mean_x:.3f}, Std Dev = {std_x:.3f}, SEM = {sem_x:.3f}")
+    print(f"Ratio Y: Mean = {mean_y:.3f}, Std Dev = {std_y:.3f}, SEM = {sem_y:.3f}")
+    print(f"Ratio R: Mean = {mean_r:.3f}, Std Dev = {std_r:.3f}, SEM = {sem_r:.3f}")
 
 # =========================== COLOR MANAGEMENT =========================== #
 

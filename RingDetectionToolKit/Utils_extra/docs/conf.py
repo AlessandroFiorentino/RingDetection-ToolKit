@@ -9,20 +9,19 @@
 #Sphinx can find the Python module:
 import os
 import sys
-
-# Adjust the path so it points to the folder containing 'ringdetection.py'
+# Adjust the path so it points to the folder containing 'utils_complete.py'
 # If 'docs' and 'ring_detection_dummy' are siblings, you go one level up:
-sys.path.insert(0, os.path.abspath('../RingDetectionToolKit'))
+sys.path.insert(0, os.path.abspath('..'))
 #sys.path.insert(0, os.path.abspath('RELATIVE_PATH_TO_CODE'))
 
-
-project = 'RingDetection'
-copyright = '2025, Alessandro Fiorentino'
-author = 'Alessandro Fiorentino'
+project = 'Utils Extra'
+copyright = '2025, Alseeandro Fiorentino'
+author = 'Alseeandro Fiorentino'
 release = '1.0.a0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
 
 extensions = [
     'sphinx.ext.autodoc',       # Auto-generate docs from docstrings
@@ -38,8 +37,7 @@ autodoc_default_options = {
     'private-members': True
 }
 
-autodoc_mock_imports = ["tensorflow"]
-
+autodoc_mock_imports = ["tensorflow", "tqdm"]
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
