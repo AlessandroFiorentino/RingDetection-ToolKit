@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="RingDetectionToolkit",
-    version="0.1.0",
+    version="1.0.0",
     author="Alessandro Fiorentino",
     author_email="alexfiore98@gmail.com",
     description="A toolkit for ring detection tasks.",
