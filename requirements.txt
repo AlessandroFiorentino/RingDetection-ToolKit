@@ -6,10 +6,10 @@ scipy==1.10.1
 tqdm==4.65.0
 
 # GPU acceleration
-pycuda==2025.1
+#pycuda==2025.1
 
 # Deep learning
-tensorflow==2.18.0
+#tensorflow==2.18.0
 
 # Documentation (used by Sphinx)
 sphinx==7.2.6
