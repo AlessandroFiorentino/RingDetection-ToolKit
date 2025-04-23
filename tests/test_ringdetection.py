@@ -27,7 +27,7 @@ from unittest.mock import patch
 import numpy as np
 
 
-from RingDetectionToolkit.ringdetection import (
+from RingDetectionToolkit.RingDetectionToolkit.ringdetection import (
     print_circle,
     print_circles,
     adaptive_clustering,
