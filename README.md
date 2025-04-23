@@ -1,5 +1,5 @@
 # RingDetectionToolkit :bookmark_tabs:
-RingDetectionToolkit is a full-featured Python module designed to **simulate**, **detect**, and **analyze geometric ring structures in 2D data**.
+RingDetectionToolkit is a full-featured Python module for **simulating**, **detecting**, and **analysing geometric ring structures in 2D data**.
 
 This toolkit provides: a Python toolkit to generate, cluster, and classify noisy ring patterns.
 
@@ -12,7 +12,7 @@ This toolkit provides: a Python toolkit to generate, cluster, and classify noisy
 - Custom clustering techniques optimized for ring detection
 - Adaptive DBSCAN-based methods with parameter tuning
 - Robust circle fitting algorithms for noisy and partial rings
-- Error-tolerant comparison between syntetic data and found rings
+- Error-tolerant comparison between synthetic data and found rings
 
 ## :bar_chart: Performance & Visualization
 - Evaluation metrics and visualization tools
@@ -20,7 +20,7 @@ This toolkit provides: a Python toolkit to generate, cluster, and classify noisy
 - Modular structure for use in notebooks or pipelines
 
 ## :gear: Extras: Experimental Modules & Studies
-A set of additional utilities and tryes, such as:
+A set of additional utilities and tries, such as:
 - Fast generation and fitting algorithms
 - Circle merging heuristics
 - A CNN-based classifier for ring count recognition
@@ -29,8 +29,8 @@ A set of additional utilities and tryes, such as:
 
 > [!Note]
 > This repository is structured for modular experimentation and extension.
-Main functionality lives in the core toolkit, while extra/ or experiments/ folders
-host advanced studies and prototyping tools.
+The main functionality lives in the core toolkit, while extra/ or experiments/ folders.
+Host advanced studies and prototyping tools.
 
 ---
 <details>
