@@ -1,0 +1,130 @@
+Analysis completed at: 2025-04-16 13:46:42
+
+=== CURRENT PARAMETER VALUES ===
+NUM_RINGS: 3
+X_MIN: 0.200
+X_MAX: 0.800
+Y_MIN: 0.200
+Y_MAX: 0.800
+R_MIN: 0.165
+R_MAX: 0.643
+POINTS_PER_RING: 500
+RADIUS_SCATTER: 0.010
+MIN_DBSCAN_EPS: 0.001
+MAX_DBSCAN_EPS: 1
+MIN_CLUSTERS_PER_RING: 3
+MAX_CLUSTERS_PER_RING: 4
+MIN_SAMPLES: 15
+SIGMA_THRESHOLD_RM: 2.000
+SIGMA_THRESHOLD: 2.000
+S_SCALE: 1.800
+FITTING_PAIR_TRESHOLD: 20
+N_FT: 500
+
+=== TUNING INFORMATION ===
+Parameter Tuned: MIN_SAMPLES
+Parameter Values Tested: [ 4.  5.  6.  7.  8.  9. 10. 11. 12. 13. 14. 15.]
+Number of Seeds per Value: 500
+
+=== SUMMARY STATISTICS ===
+Total Elapsed Time: 2247.31 seconds
+Average Time per Seed: 0.37 seconds
+Average Efficiency: 81.98%
+
+=== DETAILED RESULTS ===
+
+Value: 4.0
+Mean Ratii:
+ X: 2.306 ± 0.088
+ Y: 2.219 ± 0.085 
+ R: 2.425 ± 0.094
+Efficiency: 91.73%
+Time: 213.57s
+
+Value: 5.0
+Mean Ratii:
+ X: 2.337 ± 0.088
+ Y: 2.257 ± 0.083 
+ R: 2.437 ± 0.094
+Efficiency: 91.87%
+Time: 206.65s
+
+Value: 6.0
+Mean Ratii:
+ X: 2.414 ± 0.094
+ Y: 2.387 ± 0.093 
+ R: 2.498 ± 0.092
+Efficiency: 90.87%
+Time: 205.85s
+
+Value: 7.0
+Mean Ratii:
+ X: 2.365 ± 0.092
+ Y: 2.353 ± 0.099 
+ R: 2.486 ± 0.096
+Efficiency: 89.53%
+Time: 200.45s
+
+Value: 8.0
+Mean Ratii:
+ X: 2.348 ± 0.110
+ Y: 2.304 ± 0.090 
+ R: 2.408 ± 0.090
+Efficiency: 88.47%
+Time: 205.89s
+
+Value: 9.0
+Mean Ratii:
+ X: 2.378 ± 0.097
+ Y: 2.317 ± 0.085 
+ R: 2.423 ± 0.092
+Efficiency: 87.47%
+Time: 197.97s
+
+Value: 10.0
+Mean Ratii:
+ X: 2.353 ± 0.091
+ Y: 2.338 ± 0.093 
+ R: 2.416 ± 0.090
+Efficiency: 86.07%
+Time: 189.40s
+
+Value: 11.0
+Mean Ratii:
+ X: 2.512 ± 0.103
+ Y: 2.446 ± 0.100 
+ R: 2.479 ± 0.096
+Efficiency: 83.80%
+Time: 181.96s
+
+Value: 12.0
+Mean Ratii:
+ X: 2.435 ± 0.095
+ Y: 2.555 ± 0.101 
+ R: 2.596 ± 0.102
+Efficiency: 78.27%
+Time: 176.64s
+
+Value: 13.0
+Mean Ratii:
+ X: 2.433 ± 0.098
+ Y: 2.357 ± 0.094 
+ R: 2.449 ± 0.098
+Efficiency: 74.27%
+Time: 168.11s
+
+Value: 14.0
+Mean Ratii:
+ X: 2.732 ± 0.122
+ Y: 2.448 ± 0.110 
+ R: 2.512 ± 0.108
+Efficiency: 65.67%
+Time: 156.66s
+
+Value: 15.0
+Mean Ratii:
+ X: 2.658 ± 0.151
+ Y: 2.431 ± 0.109 
+ R: 2.546 ± 0.119
+Efficiency: 55.80%
+Time: 144.16s
