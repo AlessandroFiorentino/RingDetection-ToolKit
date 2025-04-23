@@ -1,6 +1,6 @@
 # Copyright (C) 2025 a.fiorentino4@studenti.unipi.it
 # For license terms see LICENSE file.
-#
+##
 # SPDX-License-Identifier: GPL-2.0-or-later
 #
 # This program is free software under GPLv2+
