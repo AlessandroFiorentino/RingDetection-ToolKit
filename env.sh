@@ -1,0 +1,1 @@
+export PYTHONPATH=C:/Users/Alessandro/Desktop/Laurea_Magistrale/CMEPDA/RingDetectionToolkit:$PYTHONPATH

@@ -27,7 +27,7 @@ from unittest.mock import patch
 import numpy as np
 
 
-from Ring_detection_dummy.utils_complete import (
+from RingDetectionToolkit.ringdetection import (
     print_circle,
     print_circles,
     adaptive_clustering,
@@ -628,7 +628,7 @@ class TestCompareAndMergeClusters(unittest.TestCase):
         """Test successful cluster merging."""
         # Patch fit_circle_to_points to return a new circle with RMSE lower than max(0.02, 0.025)
         # so that clusters 1 and 2 merge.
-        with patch('Ring_detection_dummy.utils_complete.fit_circle_to_points',
+        with patch('RingDetectionToolkit.ringdetection.fit_circle_to_points',
                 return_value=(np.array([0.51, 0.505, 0.195]),
                                 np.array([0.015, 0.012, 0.0055]),
                                 0.02)):
@@ -657,7 +657,7 @@ class TestCompareAndMergeClusters(unittest.TestCase):
 
         # Patch fit_circle_to_points to simulate a fit that yields a RMSE
         # higher than max(0.02, 0.5) i.e. 0.6, so that the merge is rejected.
-        with patch('Ring_detection_dummy.utils_complete.fit_circle_to_points',
+        with patch('RingDetectionToolkit.ringdetection.fit_circle_to_points',
                 return_value=(np.array([0.51, 0.505, 0.195]),
                                 np.array([0.015, 0.012, 0.0055]),
                                 0.6)):
@@ -699,7 +699,7 @@ class TestCompareAndMergeClusters(unittest.TestCase):
 
         # Patch fit_circle_to_points to always return a new circle with low RMSE (0.02)
         # so that merging is accepted for every compatible pair.
-        with patch('Ring_detection_dummy.utils_complete.fit_circle_to_points',
+        with patch('RingDetectionToolkit.ringdetection.fit_circle_to_points',
                 return_value=(np.array([0.51, 0.51, 0.2]),
                                 np.array([0.04, 0.04, 0.015]),
                                 0.02)):
