@@ -1,10 +1,15 @@
 Ring Detection documentation
 ============================
 
-.. automodule:: ringdetection
+.. automodule:: RingDetectionToolkit.ringdetection
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. toctree::
-   :maxdepth: 2
+Module contents
+---------------
+
+.. automodule:: RingDetectionToolkit
+   :members:
+   :undoc-members:
+   :show-inheritance:
