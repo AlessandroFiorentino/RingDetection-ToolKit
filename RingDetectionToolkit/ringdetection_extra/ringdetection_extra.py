@@ -17,12 +17,13 @@
 """
 
 # ============================ IMPORTS ============================ #
+
 # Standard library imports
 from dataclasses import dataclass
 import math
 import multiprocessing as mp
-import sys
 import os
+import sys
 import time
 import warnings
 from functools import partial
@@ -39,19 +40,21 @@ from tqdm import tqdm
 from tensorflow.keras import layers, models
 from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
-# Go up one directory to reach utils_complete
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../RingDetectionToolKit')))
+# =========================== Find the correct path ========================
+# Go up one directory to reach ringdetection.py
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Local imports
-
-from utils_complete import (
-    sample_circles, print_circle, plot_points, plot_circle, plot_circles, fit_circle_to_points,
-    fit_circle_to_points_fast, compatible_clusters, get_color, main_procedure_adaptive,
-    find_nearest_circle, X_MIN, X_MAX, Y_MIN, Y_MAX, NUM_RINGS, MIN_DBSCAN_EPS, MAX_DBSCAN_EPS,
-    POINTS_PER_RING, RADIUS_SCATTER,
-    MIN_CLUSTERS_PER_RING, MAX_CLUSTERS_PER_RING, MIN_SAMPLES, SIGMA_THRESHOLD_RM, SIGMA_THRESHOLD,
-    S_SCALE, FITTING_PAIR_TRESHOLD, PARAMETER_NAMES
+from ringdetection import (
+    print_circle, plot_points, plot_circle, plot_circles,
+    fit_circle_to_points, fit_circle_to_points_fast, compatible_clusters,
+    get_color, main_procedure_adaptive, find_nearest_circle,
+    X_MIN, X_MAX, Y_MIN, Y_MAX, NUM_RINGS, MIN_DBSCAN_EPS, MAX_DBSCAN_EPS,
+    POINTS_PER_RING, RADIUS_SCATTER, MIN_CLUSTERS_PER_RING, R_MIN, R_MAX,
+    MAX_CLUSTERS_PER_RING, MIN_SAMPLES, SIGMA_THRESHOLD_RM, SIGMA_THRESHOLD,
+    S_SCALE, FITTING_PAIR_TRESHOLD
 )
+
 
 # ============================ CONSTANTS ============================ #
 # HyperKamiokande detector parameters
@@ -81,7 +84,6 @@ MAX_RMSE = 0.05        # Maximum allowed RMSE for valid circles
 # Parameter tuning defaults
 N_FT = 10              # Default number of fine-tuning runs
 SAVE_RESULTS = False   # Whether to save tuning results
-DRIVE_RESULTS_PATH = "./results"  # Path for saving results
 
 # ============================ DATA STRUCTURES ============================ #
 @dataclass
@@ -1034,6 +1036,12 @@ def get_current_parameters() -> Dict[str, Union[int, float]]:
     }
 
 # ============================ ANALYSIS FUNCTIONS ============================ #
+# Extended parameter configuration
+PARAMETER_NAMES = [
+    "S_SCALE", "SIGMA_THRESHOLD", "SIGMA_THRESHOLD_RM", "MIN_SAMPLES",
+    "MIN_CLUSTERS_PER_RING", "MAX_CLUSTERS_PER_RING", "NUM_RINGS",
+    "POINTS_PER_RING", "RADIUS_SCATTER", "R_MIN", "R_MAX"
+]
 
 def run_fine_tuning(parameter_name: str,
                     parameter_values: List[Union[int, float]],
@@ -1204,6 +1212,8 @@ def run_fine_tuning(parameter_name: str,
             num_nan_inf, all_results, total_times, efficiencies)
 
 # ============================ Visualization and reporting ============================ #
+#Results path, valid for my computer
+DRIVE_RESULTS_PATH = '/content/drive/MyDrive/Ring_Detection/Fine_Tuning_results'
 
 def plot_mean_ratii_vs_parameter(parameter_values: np.ndarray,
                                 ratii_data: RatiiData,
@@ -1888,7 +1898,7 @@ def test_cnn_efficiency(model: tf.keras.Model,
 
     return accuracy
 
-# =========================== Geometric verification methods  =====================
+# =========================== Geometric verification method: Ptolemy's approach  ===================
 
 def ptolemy_check(point_a: Tuple[float, float],
                   point_b: Tuple[float, float],
@@ -2044,6 +2054,7 @@ def count_points_on_circle(points: List[List[float]],
     return num_compatible_points, rmse
 
 def process_points(points: np.ndarray,
+                   sample_circles: np.ndarray,
                    k: int,
                    min_points: int = 0) -> None:
     """
@@ -2056,6 +2067,7 @@ def process_points(points: np.ndarray,
 
     Args:
         points (np.ndarray): An array of shape (N, 2) containing 2D (x, y) coordinates.
+        sample_circles (np.ndarray): Array of known circles [x, y, r] to match detected fits against
         k (int): Number of random samples (sets of 4 points) to draw and evaluate.
         min_points (int, optional): Minimum number of compatible points required to
             accept a detected circle. Defaults to 0.
@@ -2067,6 +2079,8 @@ def process_points(points: np.ndarray,
     # Visualize the original points and known sample circles
     plot_points(points, color='blue', label="Original Points", hold=True)
     plot_circles(circles=sample_circles, title="Sample Circles", hold=False)
+
+    #Then replot the original sample circles and sample points for next visualization
     plot_points(points, color='blue', label="Original Points", hold=True)
     plot_circles(sample_circles, title="Sample Circles", hold=True)
 
@@ -2119,12 +2133,15 @@ def process_points(points: np.ndarray,
         print(f"Nearest Circle {index}, Distance: {distance:.4f}")
         print_circle(nearest_circle, label=f"Nearest Circle {index}")
 
-        found_circles.append(index)
+        found_circles.append(int(index))       # convert np.int64 to int
         print()  # For spacing
 
     # Summary
     print("\nIndices of detected circles:", found_circles)
     print(f"Unique circles found: {set(found_circles)}")
+
+    # Show final plot
+    plt.show()
 
 
 def plot_quadrilateral_and_circle(points: List[np.ndarray], color: str = 'red') -> None:

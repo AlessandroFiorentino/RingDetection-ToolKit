@@ -21,6 +21,7 @@ parameters in the ring detection pipeline. Key features include:
 # ============================ IMPORTS ============================ #
 # Standard library imports
 import os
+import sys
 import time
 from dataclasses import dataclass
 from datetime import datetime
@@ -30,10 +31,13 @@ from typing import Union, Dict, Tuple, List
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
-from google.colab import drive
+
+# =========================== Find the correct path ========================
+# Go up one directory to reach ringdetection.py
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 # Local imports
-from complete_ring_detection import main_procedure_adaptive
+from ringdetection import main_procedure_adaptive
 
 # ============================ GOOGLE DRIVE SETUP ============================ #
 

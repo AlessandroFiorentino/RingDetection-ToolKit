@@ -591,3 +591,48 @@ def test_cnn_efficiency(model: tf.keras.Model,
                                    for j in range(max_circles)))
 
     return accuracy
+
+# ======================== HERE IS THE MAIN ========================#
+
+if __name__ == "__main__":
+    # ======================= CONFIG ======================= #
+    NUM_SAMPLES_PER_COUNT = 300
+    MAX_CIRCLES = 3
+    POINTS_PER_RING = 500
+    IMG_SIZE = (64, 64)
+    EPOCHS = 15
+    BATCH_SIZE = 32
+
+    # ======================= TRAIN ======================= #
+    model, _ = train_cnn(
+        num_samples_per_count=NUM_SAMPLES_PER_COUNT,
+        max_circles=MAX_CIRCLES,
+        points_per_ring=POINTS_PER_RING,
+        img_size=IMG_SIZE,
+        epochs=EPOCHS,
+        batch_size=BATCH_SIZE
+    )
+
+    # ======================= SINGLE TEST ======================= #
+    test_circles = generate_circles(np.random.randint(1, MAX_CIRCLES + 1))
+    test_points = generate_rings(test_circles)
+    test_img = points_to_image(test_points, img_size=IMG_SIZE).astype(np.float32) / 255.0
+    test_img = np.expand_dims(test_img, axis=(0, -1))
+
+    predicted = predict_rings(model, test_img, verbose=True)
+
+    plt.imshow(test_img[0, :, :, 0], cmap='gray')
+    plt.title(f"Predicted Circles: {predicted}")
+    plt.axis("off")
+    plt.show()
+
+    # ======================= EFFICIENCY ======================= #
+    ACCURACY = test_cnn_efficiency(
+        model=model,
+        num_trials=200,
+        max_circles=MAX_CIRCLES,
+        img_size=IMG_SIZE,
+        verbose=True
+    )
+
+    print(f"\n Final CNN accuracy over 200 trials: {ACCURACY:.2%}")
