@@ -25,6 +25,7 @@ import multiprocessing as mp
 import os
 import sys
 import time
+import logging
 import warnings
 from functools import partial
 from typing import Callable, Dict, List, Optional, Set, Tuple, Union
@@ -690,6 +691,171 @@ def post_process_clusters(labels: np.ndarray,
     cluster_count = len(valid_labels)
 
     return new_labels, cluster_count
+
+# Basic configuration: by default INFO and above will be shown
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(name)s %(levelname)s: %(message)s",
+    datefmt="%H:%M:%S"
+)
+
+logger = logging.getLogger(__name__)
+
+def filter_labels_logging(labels: np.ndarray,
+                  min_points: int
+                  ) -> Tuple[np.ndarray, int]:
+    """
+    Filters a list of labels based on a minimum points threshold.
+    This version uses logging module instead of the verbose input argument
+
+    Args:
+    labels: A list of integer labels.
+    min_points: The minimum number of points required for a label to be considered valid.
+
+    Returns:
+    A tuple containing:
+        - The filtered list of labels with invalid labels set to -1.
+        - The number of valid (surviving) labels.
+    Raises:
+        TypeError: If labels is not a list or numpy array
+        ValueError: If min_points is negative
+    """
+
+    # Input validation
+    if not isinstance(labels, (list, np.ndarray)):
+        raise TypeError("Labels must be a list or numpy array")
+    if min_points < 0:
+        raise ValueError("min_points must be non-negative")
+
+    # force debug-level output for this function
+    logger.setLevel(logging.DEBUG)
+
+    # Count occurrences of each label
+    label_counts = Counter(labels)
+
+    # Number of initial clusters
+    num_initial = len(label_counts) - (1 if -1 in labels else 0)
+    logger.debug("Initial clusters: %d", num_initial)
+
+    # Filter labels based on min_points
+    filtered = np.array([
+        lbl if label_counts[lbl] >= min_points else -1
+        for lbl in labels
+    ])
+
+    # Count valid (surviving) labels
+    num_final = len(set(filtered)) - (1 if -1 in labels else 0)
+    logger.debug("Final clusters:   %d", num_final)
+
+    return filtered, num_final
+
+def adaptive_clustering_logging(points: np.ndarray,
+                        min_clusters: int = 3,
+                        max_clusters: int = 4,
+                        initial_eps: float = 1.0,
+                        min_samples: int = 5,
+                        max_iter: int = 30,
+                        initial_zoom: float = 2.0
+                        ) -> Tuple[np.ndarray, int]:
+    """
+    Adjusts the eps parameter for DBSCAN until the number of clusters is within the desired range.
+
+    Parameters:
+        points (np.ndarray): The points to cluster. Must be a 2D array of shape (N, 2).
+        min_clusters (int): Minimum acceptable number of clusters. Must be greater than 0.
+        max_clusters (int): Maximum acceptable number of clusters.
+            Must be greater than min_clusters.
+        initial_eps (float): Starting value for eps. Must be positive.
+        min_samples (int): DBSCAN min_samples parameter. Must be greater than 3.
+        max_iter (int): Maximum number of iterations. Must be greater than 0.
+        initial_zoom (float): Initial zoom factor for adjusting eps. Must be greater than 1.
+        verbose (bool): If True, print detailed progress and results.
+
+    Returns:
+        Tuple[np.ndarray, int]:
+            - labels: Cluster labels for each point.
+            - cluster_count: Number of clusters found (excluding noise).
+
+    Raises:
+        ValueError: If any parameter constraints are violated
+    """
+    # Input validation
+    if not isinstance(points, np.ndarray) or points.ndim != 2 or points.shape[1] != 2:
+        raise ValueError("Points must be a 2D NumPy array of shape (N, 2).")
+    if min_clusters <= 0 or max_clusters < min_clusters:
+        raise ValueError("min_clusters must be > 0 and <= than max_clusters.")
+    if initial_eps <= 0:
+        raise ValueError("initial_eps must be positive.")
+    if min_samples < 3:
+        raise ValueError("min_samples must be at least 3.")
+    if max_iter <= 0:
+        raise ValueError("max_iter must be greater than 0.")
+    if initial_zoom <= 1:
+        raise ValueError("initial_zoom must be > 1")
+
+    assert MIN_DBSCAN_EPS > 0, "MIN_DBSCAN_EPS must be positive"
+    assert MAX_DBSCAN_EPS > MIN_DBSCAN_EPS, "MAX_DBSCAN_EPS must be greater than MIN_DBSCAN_EPS"
+
+
+    logger.info("Clustering target: %d–%d clusters", min_clusters, max_clusters)
+
+    # Handle zoom direction constants and value
+    zoom_dir = 0  # Initial zoom direction (neutral)
+    zoom_up = 1  # Zoom direction for increasing eps (merging clusters)
+    zoom_down = -1  # Zoom direction for decreasing eps (splitting clusters)
+    zoom = initial_zoom  # Initial zoom factor for adjusting eps
+
+    current_eps = initial_eps  # Start with the initial eps value
+    for i in range(max_iter):
+        # Perform DBSCAN clustering with the current eps value
+        clustering = DBSCAN(eps=current_eps, min_samples=min_samples).fit(points)
+        labels = clustering.labels_  # Get cluster labels for each point
+
+        # cleanup labels and count (real) clusters
+        labels, cluster_count = filter_labels(labels, min_samples)
+
+        logger.debug("Iter %2d: eps=%.4f, clusters=%d, zoom_dir=%d, zoom=%.4f",
+                     i+1, current_eps, cluster_count, zoom_dir, zoom)
+
+        if cluster_count < min_clusters:
+            # Too few clusters -> decrease current_eps to split clusters.
+            if zoom_dir == zoom_up:
+                zoom = 2 * zoom / (zoom + 1)  # Smoothly adjust zoom factor if direction changes
+            current_eps /= zoom
+            zoom_dir = zoom_down
+
+        elif cluster_count > max_clusters:
+            # Too many clusters -> increase current_eps to merge clusters.
+            if zoom_dir == zoom_down:
+                zoom = (zoom + 1) / 2  # Smoothly adjust zoom factor if direction changes
+            current_eps *= zoom
+            zoom_dir = zoom_up
+
+        else:
+            # Clusters within the desired range, break out of the loop
+            logger.info("Desired cluster count %d reached in %d iters (eps=%.4f)",
+                        cluster_count, i+1, current_eps)
+            break
+
+        if current_eps < MIN_DBSCAN_EPS or current_eps > MAX_DBSCAN_EPS:
+            logger.warning("eps out of allowed range [%.4f, %.4f]: %.4f",
+                           MIN_DBSCAN_EPS, MAX_DBSCAN_EPS, current_eps)
+            break
+
+    # Final diagnostics
+    # Compute number of unclustered points (noise)
+    num_unclustered = np.sum(labels == -1)
+    logger.info("Found %d clusters, %d noise points", cluster_count, num_unclustered)
+
+    # Log the number of points in each non-noise cluster
+    unique_labels = set(labels)
+    for label in unique_labels:
+        if label == -1:
+            continue # Skip noise points
+        cluster_points = points[labels == label]
+        logger.info("Cluster %d: %d points", label, len(cluster_points))
+
+    return  labels, cluster_count
 
 def fit_circles_to_clusters_fast(cluster_dict: Dict[int, Dict],
                             verbose: bool = False
