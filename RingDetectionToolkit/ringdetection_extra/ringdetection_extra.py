@@ -1057,26 +1057,8 @@ def run_fine_tuning(parameter_name: str,
                         List[float]                             # efficiencies
                     ]:
     """
-    Run the fine-tuning process for a given parameter.
-
-    Args:
-        parameter_name (str): The name of the parameter to fine-tune.
-        parameter_values (List[Union[int, float]]): List of parameter values to test.
-        n_ft (int): Number of fine-tuning runs per parameter value.
-        verbose (bool): If True, print detailed progress messages.
-
-    Returns:
-        Tuple: Contains statistics, error metrics, and diagnostic data:
-            - mean_ratii_x/y/r (List[float])
-            - std_dev_x/y/r (List[float])
-            - std_err_x/y/r (List[float])
-            - num_nan_inf (List[Dict])
-            - all_results (List[Dict])
-            - total_times (List[float])
-            - efficiencies (List[float])
+    Run the fine-tuning process for a given parameter, properly filtering out nan/inf values.
     """
-
-    # Initialize storage for results
     mean_ratii_x, mean_ratii_y, mean_ratii_r = [], [], []
     std_dev_x, std_dev_y, std_dev_r = [], [], []
     std_err_x, std_err_y, std_err_r = [], [], []
@@ -1085,122 +1067,90 @@ def run_fine_tuning(parameter_name: str,
     efficiencies = []
 
     for param_value in parameter_values:
-        # Clean up the display of floating-point parameter values
+
+        # Format parameter for clean display
         if isinstance(param_value, float):
-            formatted = f"{param_value:.3f}"
-            display_value = (
-                formatted.rstrip('0').rstrip('.') if '.' in formatted else formatted
-            )
+            display_value = f"{param_value:.3f}".rstrip('0').rstrip('.')  # clean float
         else:
             display_value = str(param_value)
 
-        print(f"\n\n\n============================Testing {parameter_name} = {display_value}..."
-              "==============================================================")
+        print(f"\n\n\n============================Testing {parameter_name}"
+              f"= {param_value}...==============================================================")
         update_parameter_value(parameter_name, param_value)
 
-        # Print all parameter values before each run
         if verbose:
             print_all_parameters(PARAMETER_NAMES,
-                               [S_SCALE, SIGMA_THRESHOLD, SIGMA_THRESHOLD_RM,
-                                MIN_SAMPLES, MIN_CLUSTERS_PER_RING,
-                                MAX_CLUSTERS_PER_RING, NUM_RINGS, POINTS_PER_RING,
-                                RADIUS_SCATTER, R_MIN, R_MAX],
-                               parameter_name, param_value)
+                                 [S_SCALE, SIGMA_THRESHOLD, SIGMA_THRESHOLD_RM,
+                                  MIN_SAMPLES, MIN_CLUSTERS_PER_RING, MAX_CLUSTERS_PER_RING,
+                                  NUM_RINGS, POINTS_PER_RING, RADIUS_SCATTER, R_MIN, R_MAX],
+                                 parameter_name, param_value)
 
-        # Initialize storage for this parameter value
         all_ratii = []
-        nan_inf_count = 0
         start_time = time.time()
 
-        # Process each seed with progress bar
         for seed in tqdm(range(n_ft), total=n_ft, desc=f"Testing {parameter_name}={display_value}"):
             np.random.seed(seed + 1)
-
-            # Get results from main procedure
             ratii = main_procedure_adaptive(verbose=False, seed=seed + 1)
-
-            # Track invalid values
-            if len(ratii) > 0:
-                nan_inf_count += np.sum(~np.isfinite(ratii))
-            all_ratii.append(ratii)
+            if ratii.size > 0:
+                all_ratii.append(ratii)
 
         elapsed_time = time.time() - start_time
         total_times.append(elapsed_time)
 
-        # Process all ratii from all seeds
-        if len(all_ratii) > 0:
-            # Stack all ratii arrays (each is n x 3)
-            stacked_ratii = np.vstack([r for r in all_ratii if len(r) > 0])
+        # Stack and filter nan/inf
+        stacked_ratii = np.vstack([r for r in all_ratii if r.size > 0])
+        nan_mask = np.isfinite(stacked_ratii[:, 0]
+                               ) & np.isfinite(stacked_ratii[:, 1]
+                                               ) & np.isfinite(stacked_ratii[:, 2])
+        valid_ratii = stacked_ratii[nan_mask]
 
-            if len(stacked_ratii) > 0:
-                # Calculate statistics for each component
-                means = np.nanmean(stacked_ratii, axis=0)
-                std_devs = np.nanstd(stacked_ratii, axis=0)
-                std_errs = std_devs / np.sqrt(len(stacked_ratii))
+        nan_inf_count = {
+            "parameter_value": param_value,
+            "nan_inf_count_x": int(np.sum(~np.isfinite(stacked_ratii[:, 0]))),
+            "nan_inf_count_y": int(np.sum(~np.isfinite(stacked_ratii[:, 1]))),
+            "nan_inf_count_r": int(np.sum(~np.isfinite(stacked_ratii[:, 2])))
+        }
+        num_nan_inf.append(nan_inf_count)
 
-                # Calculate efficiency
-                efficiency = (len(stacked_ratii) / (n_ft * NUM_RINGS)) * 100
-
-                # Store results
-                mean_ratii_x.append(means[0])
-                mean_ratii_y.append(means[1])
-                mean_ratii_r.append(means[2])
-                std_dev_x.append(std_devs[0])
-                std_dev_y.append(std_devs[1])
-                std_dev_r.append(std_devs[2])
-                std_err_x.append(std_errs[0])
-                std_err_y.append(std_errs[1])
-                std_err_r.append(std_errs[2])
-                efficiencies.append(efficiency)
-            else:
-                # No valid ratii found
-                means = [np.nan, np.nan, np.nan]
-                std_devs = [np.nan, np.nan, np.nan]
-                std_errs = [np.nan, np.nan, np.nan]
-                efficiency = 0.0
+        if valid_ratii.size > 0:
+            means = np.mean(valid_ratii, axis=0)
+            std_devs = np.std(valid_ratii, axis=0)
+            std_errs = std_devs / np.sqrt(len(valid_ratii))
+            efficiency = (len(valid_ratii) / (n_ft * NUM_RINGS)) * 100
         else:
-            means = [np.nan, np.nan, np.nan]
-            std_devs = [np.nan, np.nan, np.nan]
-            std_errs = [np.nan, np.nan, np.nan]
+            means = std_devs = std_errs = [np.nan, np.nan, np.nan]
             efficiency = 0.0
 
-        # Store counts and results
-        num_nan_inf.append({
-            "parameter_value": param_value,
-            "nan_inf_count_x": (
-                np.sum(~np.isfinite(stacked_ratii[:, 0])) if len(stacked_ratii) > 0 else 0
-            ),
-            "nan_inf_count_y": (
-                np.sum(~np.isfinite(stacked_ratii[:, 1])) if len(stacked_ratii) > 0 else 0
-            ),
-            "nan_inf_count_r": (
-                np.sum(~np.isfinite(stacked_ratii[:, 2])) if len(stacked_ratii) > 0 else 0
-            )
-        })
+        mean_ratii_x.append(means[0])
+        mean_ratii_y.append(means[1])
+        mean_ratii_r.append(means[2])
+        std_dev_x.append(std_devs[0])
+        std_dev_y.append(std_devs[1])
+        std_dev_r.append(std_devs[2])
+        std_err_x.append(std_errs[0])
+        std_err_y.append(std_errs[1])
+        std_err_r.append(std_errs[2])
+        efficiencies.append(efficiency)
 
         all_results.append({
             "parameter_value": param_value,
-            "mean_ratii_x": means[0],
-            "mean_ratii_y": means[1],
-            "mean_ratii_r": means[2],
-            "std_dev_x": std_devs[0],
-            "std_dev_y": std_devs[1],
-            "std_dev_r": std_devs[2],
-            "std_err_x": std_errs[0],
-            "std_err_y": std_errs[1],
-            "std_err_r": std_errs[2],
-            "nan_inf_count": nan_inf_count,
+            "mean_ratii_x": means[0], "mean_ratii_y": means[1], "mean_ratii_r": means[2],
+            "std_dev_x": std_devs[0], "std_dev_y": std_devs[1], "std_dev_r": std_devs[2],
+            "std_err_x": std_errs[0], "std_err_y": std_errs[1], "std_err_r": std_errs[2],
+            "nan_inf_count_x": nan_inf_count["nan_inf_count_x"],
+            "nan_inf_count_y": nan_inf_count["nan_inf_count_y"],
+            "nan_inf_count_r": nan_inf_count["nan_inf_count_r"],
             "elapsed_time": elapsed_time,
             "efficiency": efficiency
         })
 
         if verbose:
             print("\nStatistics for Ratii:")
-            print(f"Ratio X: Mean = {means[0]:.3f}, Std Dev = {std_devs[0]:.3f},"
+            print(f"Ratio X: Mean = {means[0]:.3f}, Std Dev = {std_devs[0]:.3f}, "
                   f"SEM = {std_errs[0]:.3f}")
-            print(f"Ratio Y: Mean = {means[1]:.3f}, Std Dev = {std_devs[1]:.3f},"
+            print(f"Ratio Y: Mean = {means[1]:.3f}, Std Dev = {std_devs[1]:.3f}, "
                   f"SEM = {std_errs[1]:.3f}")
-            print(f"Ratio R: Mean = {means[2]:.3f}, Std Dev = {std_devs[2]:.3f},"
+            print(f"Ratio R: Mean = {means[2]:.3f}, Std Dev = {std_devs[2]:.3f}, "
                   f"SEM = {std_errs[2]:.3f}")
             print(f"\nTotal Elapsed Time: {elapsed_time:.2f} seconds")
             print(f"Average Time per Seed: {elapsed_time / n_ft:.2f} seconds")
