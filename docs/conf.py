@@ -51,4 +51,4 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # Theme options
 html_theme = 'sphinx_rtd_theme'
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+#html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
