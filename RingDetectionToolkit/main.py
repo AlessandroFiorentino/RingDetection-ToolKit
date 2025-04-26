@@ -2,7 +2,7 @@
 # For license terms see LICENSE file.
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
-#
+##
 # This program is free software under GPLv2+
 # See https://www.gnu.org/licenses/gpl-2.0.html
 
