@@ -26,14 +26,14 @@ RingDetectionToolkit is a Python module for **end-to-end 2D ring analysis**, fro
 - Adaptive ('main_procedure_adaptive'): self-tuning outer loop—recovers rings under heavy noise.
 
 ## :bar_chart: Performance & Visualization
-- Interactive visualization & reporting to plot and print utilities for points, circles, clusters, histograms, and color‐coded summaries  
-- Robust evaluation & diagnostics for normalized error ratios, fitting‐pair matching, efficiency metrics, and comparability reports.
+- Interactive visualization and reporting to plot and print utilities for points, circles, clusters, histograms, and color‐coded summaries  
+- Robust evaluation and diagnostics for normalized error ratios, fitting‐pair matching, efficiency metrics, and comparability reports.
 
 
 ## :rocket: Extras: Experimental Modules & Studies
 A set of additional utilities and tries, such as:
 - HyperKamiokande-specific geometry calculators
-- CPU/GPU-accelerated point sampling (multiprocessing & PyCUDA)  
+- CPU/GPU-accelerated point sampling (multiprocessing and PyCUDA)  
 - Circle merging alternative functions
 - A CNN-based classifier for ring count recognition
 - Hyperparameter Tuning attempts for parameter optimization
