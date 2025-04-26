@@ -86,6 +86,64 @@ MAX_RMSE = 0.05        # Maximum allowed RMSE for valid circles
 N_FT = 10              # Default number of fine-tuning runs
 SAVE_RESULTS = False   # Whether to save tuning results
 
+# ============================ EXPORT LIST ============================ #
+__all__ = [
+    # Data Structures
+    'RatiiData',
+
+    # HyperKamiokande calculations
+    'calculate_radii_in_kamiokande',
+
+    # Point Generation
+    'generate_ring_points',
+    'generate_rings_vectorized',
+    'generate_rings',
+    'generate_rings_gpu',
+
+    # Ring Metrics and Quality Assessment
+    'calculate_ring_metrics',
+    'calculate_average_ring_metrics',
+    'is_a_good_circle_fast',
+    'count_points_on_circle',
+
+    # Cluster Processing Utilities
+    'post_process_clusters',
+    'filter_labels_logging',
+    'adaptive_clustering_logging',
+    'merge_clusters',
+    'compare_and_merge_clusters_2',
+
+    # Parameter Tuning and Analysis
+    'update_parameter_value',
+    'get_current_parameters',
+    'run_fine_tuning',
+    'print_all_parameters',
+    'print_nan_inf_counts',
+
+    # Visualization and Reporting
+    'plot_mean_ratii_vs_parameter',
+
+    # Data Generation (Core)
+    'generate_circles',
+    'generate_rings',
+
+    # CNN-based Ring Detection
+    'points_to_image',
+    'image_to_points',
+    'create_dataset',
+    'build_cnn',
+    'train_cnn',
+    'predict_rings',
+    'test_cnn_efficiency',
+
+    # Geometric Verification
+    'ptolemy_check',
+    'fit_circle_to_four_points',
+    'process_points',
+    'plot_quadrilateral_and_circle',
+    'circumcircle'
+]
+
 # ============================ DATA STRUCTURES ============================ #
 @dataclass
 class RatiiData:
@@ -113,7 +171,7 @@ class RatiiData:
     total_times: np.ndarray
     efficiencies: np.ndarray
 
-# ============================ CORE FUNCTIONS ============================ #
+# ============================ HYPERKAMIOKANDE ============================ #
 # HyperKamiokande-specific calculations
 def calculate_radii_in_kamiokande(n_h2o: float, beta_nu: float,
                    inner_diameter: float, inner_height: float,
