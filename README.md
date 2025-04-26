@@ -11,8 +11,8 @@ RingDetectionToolkit is a Python module for **end-to-end 2D ring analysis**, fro
 
 ## :bookmark_tabs: Adaptive Clustering & Fitting
 - Adaptive DBSCAN clustering with parameter tuning
-- Least-squares & Fast algebraic circle fits per cluster 
-- Core-ring selection & outlier filtering for the highest-quality fits  
+- Least-squares and fast algebraic circle fits per cluster 
+- Core-ring selection and outlier filtering for the highest-quality fits  
 - Cluster merging using σ-scaled spatial/radial uncertainty.
 
 ## :dart: Best-Ring Extraction & Validation
