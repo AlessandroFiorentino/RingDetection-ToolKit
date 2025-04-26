@@ -62,8 +62,7 @@ git clone https://github.com/AlessandroFiorentino/RingDetectionToolkit.git
 cd RingDetectionToolkit
 pip install -r requirements.txt
 ```
----
-
+</details> 
 <details>
 <summary> :rocket: Quick Start </summary>
 
