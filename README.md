@@ -64,7 +64,7 @@ pip install -r requirements.txt
 ```
 
 <details>
-:rocket: Quick Start
+<summary> :rocket: Quick Start </summary>
 
 After installing the requirements:
 
