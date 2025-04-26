@@ -21,7 +21,7 @@ RingDetectionToolkit is a Python module for **end-to-end 2D ring analysis**, fro
 - Error-tolerant comparison: matching each fitted circle to its corresponding original circle  
 - Computation of normalized error ratios (x, y, r) and overall detection efficiency.
 
-## :gear: Workflows
+## :gear: Procedures
 - Sequential ('main_procedure'): fast, deterministic one-pass—ideal for low-noise data  
 - Adaptive ('main_procedure_adaptive'): self-tuning outer loop—recovers rings under heavy noise.
 
