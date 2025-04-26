@@ -1,6 +1,19 @@
 # RingDetectionToolkit
 
+
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1454qnYQ4ZSxsiQox7dS8wo6We9gcrMfM?usp=sharing)
+
 RingDetectionToolkit is a Python module for **end-to-end 2D ring analysis**, from **synthetic noisy-ring generation** through **adaptive clustering**, **circle fitting**, **best-ring extraction**, and **statistical validation**. It includes **core workflows** for both low-noise and heavy-noise scenarios, plus a series of exploratory extras.
+
+---
+
+## 🚀 Demo
+
+A **view-only** Google Colab notebook is available here — no setup required, just click to explore all functions with live examples:
+
+[Open the demo notebook (read-only)](https://colab.research.google.com/drive/1454qnYQ4ZSxsiQox7dS8wo6We9gcrMfM?usp=sharing)
+
+---
 
 ## :triangular_ruler: Synthetic Data & Geometry 
 - Generation of circular and ring-shaped synthetic datasets
