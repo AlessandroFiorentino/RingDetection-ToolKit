@@ -1,36 +1,44 @@
 # RingDetectionToolkit
-RingDetectionToolkit is a Python module for **simulating**, **detecting**, and **analysing geometric ring structures in 2D data**.
 
-This toolkit provides: a Python toolkit to generate, cluster, and classify noisy ring patterns.
+RingDetectionToolkit is a Python module for **end-to-end 2D ring analysis**: from **synthetic noisy-ring generation** through **adaptive clustering**, **circle fitting**, **best-ring extraction**, and **statistical validation**. Includes **core workflows** for both low-noise and heavy-noise scenarios, plus a series of exploratory extras.
 
 ## :triangular_ruler: Synthetic Data & Geometry 
 - Generation of circular and ring-shaped synthetic datasets
 - Flexible simulation of overlapping and nested ring structures
-- Support for controlled noise and spatial randomness
+- Controlled radial scatter and positional noise
 
 ## :bookmark_tabs: Adaptive Clustering & Fitting
-- Custom clustering techniques optimized for ring detection
-- Adaptive DBSCAN-based methods with parameter tuning
-- Circle fitting algorithms for noisy and partial rings
-- Error-tolerant comparison between synthetic data and found rings
+- Adaptive DBSCAN clustering with parameter tuning
+- Least-squares & Fast algebraic circle fits per cluster 
+- Core-ring selection & outlier filtering for highest-quality fits  
+- Cluster merging using σ-scaled spatial/radial uncertainty
 
-## :bar_chart: Performance & Visualization
-- Evaluation metrics and visualization tools
-- Diagnostic plots for cluster quality, fit accuracy, and more
-- Modular structure for use in notebooks or pipelines
+## :dart: Best-Ring Extraction & Validation
+- Extracts “core” ring points within combined center+radius error bounds  
+- Outlier exclusion for final fit refinement  
+- Error-tolerant comparison: matching each fitted circle to its corresponding original circle  
+- Computation of normalized error ratios (x, y, r) and overall detection efficiency
 
-## :gear: Extras: Experimental Modules & Studies
+## :gear: Workflows
+- Sequential ('main_procedure'): fast, deterministic one-pass—ideal for low-noise data  
+- Adaptive ('main_procedure_adaptive'): self-tuning outer loop—recovers rings under heavy noise
+
+- ## :bar_chart: Performance & Visualization
+- Interactive visualization & reporting to plot and print utilities for points, circles, clusters, histograms, and color‐coded summaries  
+- Robust evaluation & diagnostics for normalized error ratios, fitting‐pair matching, efficiency metrics, and comparability reports
+
+
+## :rocket: Extras: Experimental Modules & Studies
 A set of additional utilities and tries, such as:
-- Fast generation and fitting algorithms
-- Circle merging heuristics
+- HyperKamiokande-specific geometry calculators
+- CPU/GPU-accelerated point sampling (multiprocessing & PyCUDA)  
+- Circle merging alternative functions
 - A CNN-based classifier for ring count recognition
-- Fine-tuning tyes for parameter optimization
-- Exploratory tools like Ptolemy's theorem validation on quadrilaterals
+- Hyperparameter Tuning attempts for parameter optimization
+- Ptolemy’s theorem tests for ring extraction. 
 
 > [!Note]
-> This repository is structured for modular experimentation and extension.
-The main functionality lives in the core toolkit, while extra/ or experiments/ folders.
-Host advanced studies and prototyping tools.
+> All modules in RingDetectionToolkit_Extra are **exploratory** and may evolve. They are **not** required for standard ring detection workflows
 
 ---
 <details>
