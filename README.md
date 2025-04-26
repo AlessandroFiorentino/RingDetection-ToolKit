@@ -51,7 +51,7 @@ A **view-only** Google Colab notebook is available here — no setup required, j
 ---
 
 > [!Note]
-> All modules in RingDetectionToolkit_Extra are **exploratory** and may evolve. They are **not** required for standard ring detection workflows.
+> All modules in RingDetectionToolkit_Extra are **exploratory** and may evolve. They are **not** required for standard ring detection procedures.
 
 ---
 <details>
