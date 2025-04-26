@@ -35,7 +35,12 @@ A set of additional utilities and tries, such as:
 - Circle merging alternative functions
 - A CNN-based classifier for ring count recognition
 - Hyperparameter Tuning attempts for parameter optimization
-- Ptolemy’s theorem tests for ring extraction. 
+- Ptolemy’s theorem tests for ring extraction.
+
+## :notebook_with_decorative_cover: Interactive Colab Demo
+
+A read-only, executable Colab version is available here:
+[Open the demo notebook](https://colab.research.google.com/drive/1454qnYQ4ZSxsiQox7dS8wo6We9gcrMfM?usp=sharing)
 
 > [!Note]
 > All modules in RingDetectionToolkit_Extra are **exploratory** and may evolve. They are **not** required for standard ring detection workflows.
