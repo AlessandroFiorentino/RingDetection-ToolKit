@@ -63,6 +63,7 @@ cd RingDetectionToolkit
 pip install -r requirements.txt
 ```
 
+<details>
 <summary> :rocket: Quick Start </summary>
 
 After installing the requirements:
