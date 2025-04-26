@@ -30,7 +30,7 @@ RingDetectionToolkit is a Python module for **end-to-end 2D ring analysis**, fro
 - Robust evaluation and diagnostics for normalized error ratios, fitting‐pair matching, efficiency metrics, and comparability reports.
 
 
-## :rocket: Extras: Experimental Modules & Studies
+## :heavy_plus_sign: Extras: Experimental Modules & Studies
 A set of additional utilities and tries, such as:
 - HyperKamiokande-specific geometry calculators
 - CPU/GPU-accelerated point sampling (multiprocessing and PyCUDA)  
@@ -55,7 +55,7 @@ A **view-only** Google Colab notebook is available here — no setup required, j
 
 ---
 <details>
-<summary>🔧 Installation</summary>
+<summary> :wrench: Installation </summary>
 
 ```bash
 git clone https://github.com/AlessandroFiorentino/RingDetectionToolkit.git
@@ -63,3 +63,18 @@ cd RingDetectionToolkit
 pip install -r requirements.txt
 ```
 
+<details>
+:rocket: Quick Start
+
+After installing the requirements:
+
+```bash
+cd RingDetectionToolkit
+python main.py
+```
+
+- By default, this runs the **serial** workflow (`MULTIPROCESSING = False`) with **verbose output enabled** (`VERBOSE = True`).  
+- If you want **faster** and **cleaner** runs (especially with many rings or multiprocessing), consider setting `VERBOSE = False` manually inside `main.py`.  
+- See the very first docstring inside `main.py` for full usage recommendations.
+
+---

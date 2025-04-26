@@ -8,3 +8,4 @@ Ring Detection documentation
 
 .. toctree::
    :maxdepth: 2
+

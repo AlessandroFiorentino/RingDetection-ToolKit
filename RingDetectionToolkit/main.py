@@ -19,9 +19,16 @@ This script drives the end-to-end workflow for ring detection and evaluation:
 - Reports timing and performance statistics
 - Generates histograms of the normalized error ratios for visual analysis
 
-Usage:
-    Toggle 'MULTIPROCESSING = True' to enable parallel execution with 'multiprocessing.Pool'.
-    Run the script directly from bash: python3 main.py
+Usage flags:
+    MULTIPROCESSING = True   → parallel execution with multiprocessing.Pool
+    MULTIPROCESSING = False  → serial execution with a single loop
+
+    VERBOSE = True  → detailed per-seed logs (only recommended in normal mode with small N_PR)
+    VERBOSE = False → minimal console output (recommended for large N_PR or multiprocessing)
+
+Notes:
+  • In multiprocessing mode, keep VERBOSE=False to avoid interleaved log messages
+  • For step-by-step debugging, run (MULTIPROCESSING=False) with VERBOSE=True and a small N_PR
 """
 
 import time
@@ -38,6 +45,7 @@ from ringdetection import (main_procedure_adaptive, analyze_ratii_efficiency,
 
 # ============================ CONSTANTS ============================ #
 DEBUG = False           # Global debug flag for additional output
+VERBOSE = True # Controls verbose output; not recommended for large numbers of rings
 
 # -------------------- RING GENERATION PARAMETERS -------------------- #
 NUM_RINGS = 3                # Default number of rings to generate
@@ -69,7 +77,7 @@ FITTING_PAIR_TRESHOLD = 20   # Threshold for matching found-to-original rings
 
 # -------------------- PARAMETERS FOR THE MAIN --------------------#
 # Number of repetitions for the main procedure
-N_PR = 500
+N_PR = 5
 
 # Global constant to set if you want to save
 SAVE_RESULTS = False
@@ -78,7 +86,7 @@ SAVE_RESULTS = False
 N_BINS = 200
 
 # Enable the possibility to go multiprocessing
-MULTIPROCESSING = True
+MULTIPROCESSING = False
 
 
 # Worker function for multiprocessing
@@ -93,7 +101,7 @@ def worker(seeed: int) -> np.ndarray:
         np.ndarray: Array of shape (n, 3) with [r_x, r_y, r_r] for valid rings.
     """
     np.random.seed(seeed + 1)
-    return main_procedure_adaptive(verbose=False, seed=seeed)
+    return main_procedure_adaptive(verbose=VERBOSE, seed=seeed)
 
 # ======================== HERE IS THE MAIN ========================#
 
@@ -126,7 +134,7 @@ if __name__ == "__main__":
             np.random.seed(seed + 1)
 
             # Run adaptive procedure
-            good_ratii = main_procedure_adaptive(verbose=False, seed=seed)
+            good_ratii = main_procedure_adaptive(verbose=VERBOSE, seed=seed)
 
             # Store valid results
             if good_ratii.size > 0:
