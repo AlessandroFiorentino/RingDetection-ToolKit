@@ -1,7 +1,7 @@
 Introduction
 ============
 
-.. automodule:: main
+.. automodule:: RingDetectionToolkit.main
    :members:
    :undoc-members:
    :show-inheritance:
