@@ -45,7 +45,42 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="main.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation Guide</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Ring Detection documentation</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ring Detection documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.print_circle"><code class="docutils literal notranslate"><span class="pre">print_circle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.print_circles"><code class="docutils literal notranslate"><span class="pre">print_circles()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.calculate_and_print_statistics"><code class="docutils literal notranslate"><span class="pre">calculate_and_print_statistics()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.get_color"><code class="docutils literal notranslate"><span class="pre">get_color()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.plot_commons"><code class="docutils literal notranslate"><span class="pre">plot_commons()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.plot_points_base"><code class="docutils literal notranslate"><span class="pre">plot_points_base()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.plot_points"><code class="docutils literal notranslate"><span class="pre">plot_points()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.plot_circle"><code class="docutils literal notranslate"><span class="pre">plot_circle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.plot_circles"><code class="docutils literal notranslate"><span class="pre">plot_circles()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.plot_ratii_histograms"><code class="docutils literal notranslate"><span class="pre">plot_ratii_histograms()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.show_dictionary"><code class="docutils literal notranslate"><span class="pre">show_dictionary()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.is_a_good_circle"><code class="docutils literal notranslate"><span class="pre">is_a_good_circle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.generate_circles"><code class="docutils literal notranslate"><span class="pre">generate_circles()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.generate_rings_complete"><code class="docutils literal notranslate"><span class="pre">generate_rings_complete()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.generate_rings_complete_vectorized"><code class="docutils literal notranslate"><span class="pre">generate_rings_complete_vectorized()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.fit_circle_to_points"><code class="docutils literal notranslate"><span class="pre">fit_circle_to_points()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.fit_circle_to_points_fast"><code class="docutils literal notranslate"><span class="pre">fit_circle_to_points_fast()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.fit_circles_to_clusters"><code class="docutils literal notranslate"><span class="pre">fit_circles_to_clusters()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.fit_circles_to_clusters_fast"><code class="docutils literal notranslate"><span class="pre">fit_circles_to_clusters_fast()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.filter_labels"><code class="docutils literal notranslate"><span class="pre">filter_labels()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.adaptive_clustering"><code class="docutils literal notranslate"><span class="pre">adaptive_clustering()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.create_cluster_dict"><code class="docutils literal notranslate"><span class="pre">create_cluster_dict()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.filter_fitted_clusters"><code class="docutils literal notranslate"><span class="pre">filter_fitted_clusters()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.compatible_clusters"><code class="docutils literal notranslate"><span class="pre">compatible_clusters()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.compare_and_merge_clusters"><code class="docutils literal notranslate"><span class="pre">compare_and_merge_clusters()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.extract_points"><code class="docutils literal notranslate"><span class="pre">extract_points()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.extract_best_ring"><code class="docutils literal notranslate"><span class="pre">extract_best_ring()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.exclude_outliers"><code class="docutils literal notranslate"><span class="pre">exclude_outliers()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.calculate_ratii"><code class="docutils literal notranslate"><span class="pre">calculate_ratii()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.find_fitting_pairs"><code class="docutils literal notranslate"><span class="pre">find_fitting_pairs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.analyze_ratii_efficiency"><code class="docutils literal notranslate"><span class="pre">analyze_ratii_efficiency()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.find_nearest_circle"><code class="docutils literal notranslate"><span class="pre">find_nearest_circle()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.evaluate_fit_comparability"><code class="docutils literal notranslate"><span class="pre">evaluate_fit_comparability()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.main_procedure_adaptive"><code class="docutils literal notranslate"><span class="pre">main_procedure_adaptive()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.ringdetection.main_procedure"><code class="docutils literal notranslate"><span class="pre">main_procedure()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -74,8 +109,1067 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ring-detection-documentation">
-<h1>Ring Detection documentation<a class="headerlink" href="#ring-detection-documentation" title="Link to this heading"></a></h1>
+  <section id="module-RingDetectionToolkit.ringdetection">
+<span id="ring-detection-documentation"></span><h1>Ring Detection documentation<a class="headerlink" href="#module-RingDetectionToolkit.ringdetection" title="Link to this heading"></a></h1>
+<p>Ring Detection and Analysis Toolkit</p>
+<p>This comprehensive module provides all core functionality for:</p>
+<ul class="simple">
+<li><p>Synthetic data generation and simulation</p></li>
+<li><p>Adaptive clustering algorithms</p></li>
+<li><p>Circle fitting and geometric analysis</p></li>
+<li><p>Visualization and reporting tools</p></li>
+<li><p>Performance evaluation and metrics</p></li>
+<li><p>Core algorithms for adaptive ring detection</p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.print_circle">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">print_circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rmse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#print_circle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.print_circle" title="Link to this definition"></a></dt>
+<dd><p>Prints the details of a circle, including its center, radius, errors (if provided),
+and RMSE (if provided).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circle</strong> (<em>np.ndarray</em>) – <p>A NumPy array representing the circle as [x, y, r], where:</p>
+<ul>
+<li><p>x, y are the coordinates of the center.</p></li>
+<li><p>r is the radius.</p></li>
+</ul>
+</p></li>
+<li><p><strong>errors</strong> (<em>np.ndarray</em><em>, </em><em>optional</em>) – A NumPy array representing the errors as:
+[err_x, err_y, err_r].</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – A title to print before the circle details.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – A label to prepend to the circle details (e.g., “Cluster 1”).</p></li>
+<li><p><strong>rmse</strong> (<em>float</em><em>, </em><em>optional</em>) – The Root Mean Square Error (RMSE).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the length of the errors array does not match the length of the circle array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.print_circles">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">print_circles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rmse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#print_circles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.print_circles" title="Link to this definition"></a></dt>
+<dd><p>Print details for multiple circles, including their centers, radii,
+and optional errors and RMSE.</p>
+<p>This function generalizes ‘print_circle’ to handle multiple circles.
+The ‘enum’ argument can be used to provide custom enumeration labels
+for each circle. If ‘enum’ is not provided, circles are enumerated
+from 0 to n-1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circles</strong> (<em>np.ndarray</em>) – A NumPy array of circles,
+where each circle is represented as [x, y, r].</p></li>
+<li><p><strong>errors</strong> (<em>Optional</em><em>[</em><em>np.ndarray</em><em>]</em>) – A NumPy array of errors, where each row is:
+[err_x, err_y, err_r]. Defaults to None.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – A title to print before the circle details. Defaults to None.</p></li>
+<li><p><strong>label</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – A label to prepend to each circle’s details (e.g., “Cluster”).
+Defaults to None.</p></li>
+<li><p><strong>enum</strong> (<em>Optional</em><em>[</em><em>np.ndarray</em><em>]</em>) – A NumPy array of custom enumeration labels for each circle.
+Defaults to None.</p></li>
+<li><p><strong>rmse</strong> (<em>Optional</em><em>[</em><em>np.ndarray</em><em>]</em>) – A NumPy array of RMSE values for each circle. Defaults to None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the input arrays have incorrect shapes or lengths. Then,</p></li>
+<li><p><strong>if the lengths</strong><strong> of </strong><strong>'errors'</strong><strong>, </strong><strong>'rmse'</strong><strong>, or </strong><strong>'enum' do not match the number</strong><strong> of </strong><strong>circles.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.calculate_and_print_statistics">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">calculate_and_print_statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ratii_x_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratii_y_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratii_r_array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#calculate_and_print_statistics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.calculate_and_print_statistics" title="Link to this definition"></a></dt>
+<dd><p>Calculates and prints the average (mean), standard deviation,
+and standard error of the mean (SEM) for ratii_x, ratii_y, and ratii_r.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ratii_x_array</strong> (<em>np.ndarray</em>) – Array of ratio_x values.</p></li>
+<li><p><strong>ratii_y_array</strong> (<em>np.ndarray</em>) – Array of ratio_y values.</p></li>
+<li><p><strong>ratii_r_array</strong> (<em>np.ndarray</em>) – Array of ratio_r values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the lengths of the input arrays are not the same.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.get_color">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">get_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'jet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_distinct_colors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#get_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.get_color" title="Link to this definition"></a></dt>
+<dd><p>Returns a color from a specified colormap based on an index. Ensures distinct colors
+for the first ‘num_distinct_colors’ indices and cycles through the colormap for larger indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em><em>, </em><em>optional</em>) – An index to determine the color. If negative,
+the function cycles through the colormap.</p></li>
+<li><p><strong>cmap_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the colormap to use (default: “jet”).</p></li>
+<li><p><strong>num_distinct_colors</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of distinct colors to ensure for
+small indices (default: 15).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An RGBA color tuple, where each value is in the range [0, 1].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>tuple</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If ‘num_distinct_colors’ is less than 1.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.plot_commons">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">plot_commons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#plot_commons"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.plot_commons" title="Link to this definition"></a></dt>
+<dd><p>Common plotting settings for all plots.</p>
+<p>This function sets the aspect ratio, axis labels, tick marks,
+grid, bounds, and legend if specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Title of the plot.</p></li>
+<li><p><strong>bound</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to set axis limits to (0, 1) for both axes.
+Defaults to True.</p></li>
+<li><p><strong>hold</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to hold the plot
+(if False, the plot is displayed immediately). Defaults to True.</p></li>
+<li><p><strong>legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show legend with a custom bounding box.
+Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.plot_points_base">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">plot_points_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#plot_points_base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.plot_points_base" title="Link to this definition"></a></dt>
+<dd><p>Plots raw points with customizable options. Can also handle clustering
+by coloring points based on cluster labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>np.ndarray</em>) – A 2D NumPy array of shape (N, 2) representing the points to plot.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Title of the plot. Defaults to None.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Default color of the points. Ignored if ‘cluster_labels’ is provided.
+Defaults to None.</p></li>
+<li><p><strong>label</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Label for the points (used in the legend). Defaults to None.</p></li>
+<li><p><strong>cluster_labels</strong> (<em>Optional</em><em>[</em><em>np.ndarray</em><em>]</em>) – Cluster labels for each point.
+If provided, colors are assigned per cluster.</p></li>
+<li><p><strong>hold</strong> (<em>bool</em>) – Whether to hold the plot (if False, the plot is displayed immediately).
+Defaults to True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.plot_points">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">plot_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#plot_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.plot_points" title="Link to this definition"></a></dt>
+<dd><p>Plots raw points with customizable options. Can also handle clustering
+by coloring points based on cluster labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>np.ndarray</em>) – A 2D NumPy array of shape (N, 2) representing the points to plot.</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Title of the plot. Defaults to None.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Default color of the points. Ignored if ‘cluster_labels’ is provided.
+Defaults to None.</p></li>
+<li><p><strong>label</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Label for the points (used in the legend). Defaults to None.</p></li>
+<li><p><strong>cluster_labels</strong> (<em>Optional</em><em>[</em><em>np.ndarray</em><em>]</em>) – Cluster labels for each point.
+If provided, colors are assigned per cluster.</p></li>
+<li><p><strong>hold</strong> (<em>bool</em>) – Whether to hold the plot (if False, the plot is displayed immediately).
+Defaults to True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.plot_circle">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">plot_circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linestyle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'solid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_as_o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#plot_circle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.plot_circle" title="Link to this definition"></a></dt>
+<dd><p>Plots a single circle given as a NumPy array [x_c, y_c, radius].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circle</strong> (<em>np.ndarray</em>) – A NumPy array containing the circle’s center
+(x_c, y_c) and radius (radius).</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Title of the plot. Defaults to None.</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – Color of the circle. Defaults to ‘blue’.</p></li>
+<li><p><strong>linestyle</strong> (<em>str</em>) – Line style of the circle (e.g., ‘solid’, ‘dashed’). Defaults to ‘solid’.</p></li>
+<li><p><strong>label</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Label for the circle (used in the legend). Defaults to None.</p></li>
+<li><p><strong>center_as_o</strong> (<em>bool</em>) – Whether to mark the center with ‘o’ instead of ‘+’. Defaults to False.</p></li>
+<li><p><strong>hold</strong> (<em>bool</em>) – Whether to hold the plot (if False, the plot is displayed immediately).
+Defaults to True.</p></li>
+<li><p><strong>linewidth</strong> (<em>int</em>) – Width of the circle’s edge. Defaults to 3.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.plot_circles">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">plot_circles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_as_o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linestyle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'solid'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#plot_circles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.plot_circles" title="Link to this definition"></a></dt>
+<dd><p>Plots multiple circles with customizable options.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circles</strong> (<em>np.ndarray</em>) – A NumPy array of circles, where each row is [x_c, y_c, radius].</p></li>
+<li><p><strong>title</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Title of the plot. Defaults to None.</p></li>
+<li><p><strong>color</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Default color of the circles. If None, a unique color is
+assigned to each circle. Defaults to None.</p></li>
+<li><p><strong>linewidth</strong> (<em>int</em>) – Width of the circles’ edges. Defaults to 3.</p></li>
+<li><p><strong>label</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Base label for the circles (used in the legend). If ‘enum’
+is provided, the label will be appended with the enumeration value.
+Defaults to None.</p></li>
+<li><p><strong>enum</strong> (<em>Optional</em><em>[</em><em>np.ndarray</em><em>]</em>) – Custom enumeration labels for the circles.
+If provided, it must have the same length as ‘circles’. Defaults to None.</p></li>
+<li><p><strong>center_as_o</strong> (<em>bool</em>) – Whether to mark the centers with ‘o’ instead of ‘+’. Defaults to False.</p></li>
+<li><p><strong>hold</strong> (<em>bool</em>) – Whether to hold the plot (if False, the plot is displayed immediately).
+Defaults to True.</p></li>
+<li><p><strong>linestyle</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Line style of the circles (e.g., ‘solid’, ‘dashed’, ‘dotted’).
+Defaults to ‘solid’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.plot_ratii_histograms">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">plot_ratii_histograms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ratii_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratii_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ratii_r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#plot_ratii_histograms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.plot_ratii_histograms" title="Link to this definition"></a></dt>
+<dd><p>Plots histograms for the ratii_x, ratii_y, and ratii_r values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ratii_x</strong> (<em>np.ndarray</em>) – NumPy array of ratio_x values.</p></li>
+<li><p><strong>ratii_y</strong> (<em>np.ndarray</em>) – NumPy array of ratio_y values.</p></li>
+<li><p><strong>ratii_r</strong> (<em>np.ndarray</em>) – NumPy array of ratio_r values.</p></li>
+<li><p><strong>bins</strong> (<em>int</em>) – Number of bins for the histograms.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If any input is not a NumPy array or if the arrays do not have the same length.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.show_dictionary">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">show_dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plt_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plt_circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prt_circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#show_dictionary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.show_dictionary" title="Link to this definition"></a></dt>
+<dd><p>Plots the clusters from a cluster dictionary with enhanced noise handling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster_dict</strong> (<em>dict</em>) – The cluster dictionary created by <cite>create_cluster_dict</cite></p></li>
+<li><p><strong>cluster_keys</strong> (<em>iterable</em>) – Keys of clusters to plot</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Title of the plot</p></li>
+<li><p><strong>plot_points</strong> (<em>bool</em>) – Whether to plot the points</p></li>
+<li><p><strong>plot_circles</strong> (<em>bool</em>) – Whether to plot fitted circles</p></li>
+<li><p><strong>hold</strong> (<em>bool</em>) – Whether to hold the plot</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If input types are incorrect</p></li>
+<li><p><strong>ValueError</strong> – If cluster data is malformed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.is_a_good_circle">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">is_a_good_circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rmse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avg_rmse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#is_a_good_circle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.is_a_good_circle" title="Link to this definition"></a></dt>
+<dd><p>Determines if a circle is “good” based on its parameters and errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circle</strong> – The circle parameters as [cx, cy, r] (NumPy array or tuple)</p></li>
+<li><p><strong>errors</strong> – The errors as [err_x, err_y, err_r] (NumPy array or tuple)</p></li>
+<li><p><strong>rmse</strong> – The RMSE of the circle fit (NumPy array or float, optional)</p></li>
+<li><p><strong>r_max</strong> – Maximum expected radius (default: 0.8)</p></li>
+<li><p><strong>r_min</strong> – Minimum expected radius (default: 0.2)</p></li>
+<li><p><strong>alpha</strong> – Multiplier for avg_rmse in RMSE condition (default: 3)</p></li>
+<li><p><strong>avg_rmse</strong> – Average RMSE across all clusters (required if rmse is provided)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the circle meets all quality conditions, False otherwise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.generate_circles">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">generate_circles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.8</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#generate_circles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.generate_circles" title="Link to this definition"></a></dt>
+<dd><p>Generates a numpy array of circles of the form [x, y, r], where:
+- (x, y) is the center of the circle.
+- r is the radius of the circle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_circles</strong> (<em>int</em>) – Number of circles to generate.</p></li>
+<li><p><strong>x_min</strong> (<em>float</em>) – Minimum value for the x-coordinate of the circle centers. Defaults to 0.2.</p></li>
+<li><p><strong>x_max</strong> (<em>float</em>) – Maximum value for the x-coordinate of the circle centers. Defaults to 0.8.</p></li>
+<li><p><strong>y_min</strong> (<em>float</em>) – Minimum value for the y-coordinate of the circle centers. Defaults to 0.2.</p></li>
+<li><p><strong>y_max</strong> (<em>float</em>) – Maximum value for the y-coordinate of the circle centers. Defaults to 0.8.</p></li>
+<li><p><strong>r_min</strong> (<em>float</em>) – Minimum value for the radius of the circles. Defaults to 0.2.</p></li>
+<li><p><strong>r_max</strong> (<em>float</em>) – Maximum value for the radius of the circles. Defaults to 0.8.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A numpy array of shape (num_circles, 3), where each row is [x, y, r].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Issues warnings (does not raise exceptions) for:
+* Negative radii (r_min &lt; 0)
+* Radii potentially exceeding unit bounds (r_max &gt; 1)</p></li>
+<li><p>These warnings indicate potential visualization issues but don’t prevent execution</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.generate_rings_complete">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">generate_rings_complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_per_ring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_scatter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#generate_rings_complete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.generate_rings_complete" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Generates point clouds representing circular rings with controlled</dt><dd><p>radial and positional scatter.</p>
+</dd>
+</dl>
+<p>Creates a set of points for each input circle with:
+1. Radial scatter: Points vary in distance from center
+2. Positional scatter: Points are randomly displaced in x-y plane</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circles</strong> (<em>np.ndarray</em>) – Array of shape (N,3) [x_center, y_center, radius]</p></li>
+<li><p><strong>points_per_ring</strong> (<em>int</em>) – Number of points per circle</p></li>
+<li><p><strong>radius_scatter</strong> (<em>float</em>) – Maximum scatter distance in any direction</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of (x, y) coordinates with shape (N*points_per_ring, 2)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.generate_rings_complete_vectorized">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">generate_rings_complete_vectorized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_per_ring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_scatter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#generate_rings_complete_vectorized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.generate_rings_complete_vectorized" title="Link to this definition"></a></dt>
+<dd><p>Vectorized generation of rings with both radial and positional scattering.</p>
+<p>Creates points with:
+1. Radial variation: Points vary in distance from center (ring width)
+2. Positional jitter: Points get random XY displacements (positional noise)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>circles</strong> – Array of shape (N,3) [x_center, y_center, radius]</p></li>
+<li><p><strong>points_per_ring</strong> – Points to generate per circle</p></li>
+<li><p><strong>radius_scatter</strong> – Maximum scatter distance (both radial and positional)</p></li>
+<li><p><strong>bounds</strong> – (x_min, x_max, y_min, y_max) boundaries for filtering</p></li>
+<li><p><strong>verbose</strong> – Print generation statistics</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered (x,y) points as numpy array of shape (M,2)</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – For invalid inputs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.fit_circle_to_points">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">fit_circle_to_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_center</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#fit_circle_to_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.fit_circle_to_points" title="Link to this definition"></a></dt>
+<dd><p>Fits a circle to a set of 2D points using least squares optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>np.ndarray</em>) – A 2D array of points with shape (N, 2),
+where N is the number of points.</p></li>
+<li><p><strong>initial_center</strong> (<em>Optional</em><em>[</em><em>Tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em><em>]</em>) – Precomputed initial center (c_x, c_y).
+If provided, it will be used directly.</p></li>
+<li><p><strong>initial_radius</strong> (<em>Optional</em><em>[</em><em>float</em><em>]</em>) – Precomputed initial radius.
+If provided, it will be used directly.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, prints additional information about the fitting process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>[fitted_cx, fitted_cy, fitted_r]: The fitted circle’s center coordinates and radius.</p></li>
+<li><p>[cx_error, cy_error, radius_error]: The estimated errors in c_x, c_y, and radius.</p></li>
+<li><p>rmse: The root mean squared error of the fit, calculated as the square root of
+the residual sum of squares divided by the degrees of freedom.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns None if the fit fails to converge or if there are not enough points to fit a circle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">raises ValueError<span class="colon">:</span></dt>
+<dd class="field-odd"><p>If the length of the points array is less than MIN_SAMPLES.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[Tuple[np.ndarray, np.ndarray, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.fit_circle_to_points_fast">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">fit_circle_to_points_fast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#fit_circle_to_points_fast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.fit_circle_to_points_fast" title="Link to this definition"></a></dt>
+<dd><p>Fast circle fitting using a non-iterative method inspired by Crawford’s algorithm.
+Maintains the same interface as fit_circle_to_points but uses a different algorithm.</p>
+<p>Implements the algebraic circle fit method from:
+jac.F. Crawford, “A non-iterative method for fitting circular arcs to measured points”,
+Nuclear Instruments and Methods 211 (1983) 223-225:
+<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0167508783905756?via%3Dihub">https://www.sciencedirect.com/science/article/pii/0167508783905756?via%3Dihub</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>np.ndarray</em>) – 2D array of shape (N, 2) containing points to fit</p></li>
+<li><p><strong>initial_center</strong> – Ignored (exists for API compatibility)</p></li>
+<li><p><strong>initial_radius</strong> – Ignored (exists for API compatibility)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, prints debugging information</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>[fitted_cx, fitted_cy, fitted_r]: The fitted circle’s center coordinates and radius.</p></li>
+<li><p>[cx_error, cy_error, radius_error]: The estimated errors in c_x, c_y, and radius.</p></li>
+<li><p>rmse: The root mean squared error of the fit, calculated as the square root of
+the residual sum of squares divided by the degrees of freedom.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns None if the fit fails to converge or if there are not enough points to fit a circle.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[Tuple[np.ndarray, np.ndarray, float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.fit_circles_to_clusters">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">fit_circles_to_clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#fit_circles_to_clusters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.fit_circles_to_clusters" title="Link to this definition"></a></dt>
+<dd><p>Fits circles to all valid clusters in the dictionary using nonlinear least squares.</p>
+<p>Processes each valid cluster through the following pipeline:
+1. Validates cluster point distribution
+2. Performs circle fitting via fit_circle_to_points()
+3. Updates cluster metadata with fit results
+4. Marks clusters with failed fits as invalid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster_dict</strong> (<em>Dict</em><em>[</em><em>int</em><em>, </em><em>Dict</em><em>]</em>) – A dictionary of clusters (from create_cluster_dict)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether to print verbose output</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(fitted_circles, fitted_errors, fitted_rmses, fitted_labels)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If cluster_dict has invalid structure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.fit_circles_to_clusters_fast">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">fit_circles_to_clusters_fast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#fit_circles_to_clusters_fast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.fit_circles_to_clusters_fast" title="Link to this definition"></a></dt>
+<dd><p>Rapidly fits circles to clusters using Crawford’s non-iterative algebraic method.</p>
+<p>Optimized version of fit_circles_to_clusters() that uses direct matrix solving
+instead of iterative least squares. Provides 5-10x speed improvement for large
+clusters, but the accuracy is lower.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster_dict</strong> (<em>Dict</em><em>[</em><em>int</em><em>, </em><em>Dict</em><em>]</em>) – A dictionary of clusters (from create_cluster_dict)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether to print verbose output</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(fitted_circles, fitted_errors, fitted_rmses, fitted_labels)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If cluster_dict has invalid structure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.filter_labels">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">filter_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#filter_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.filter_labels" title="Link to this definition"></a></dt>
+<dd><p>Filters a list of labels based on a minimum points threshold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>labels</strong> – A list of integer labels.</p></li>
+<li><p><strong>min_points</strong> – The minimum number of points required for a label to be considered valid.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>The filtered list of labels with invalid labels set to -1.</p></li>
+<li><p>The number of valid (surviving) labels.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple containing</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If labels is not a list or numpy array</p></li>
+<li><p><strong>ValueError</strong> – If min_points is negative</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.adaptive_clustering">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">adaptive_clustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_clusters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_eps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_zoom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#adaptive_clustering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.adaptive_clustering" title="Link to this definition"></a></dt>
+<dd><p>Adjusts the eps parameter for DBSCAN until the number of clusters is within the desired range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>np.ndarray</em>) – The points to cluster. Must be a 2D array of shape (N, 2).</p></li>
+<li><p><strong>min_clusters</strong> (<em>int</em>) – Minimum acceptable number of clusters. Must be greater than 0.</p></li>
+<li><p><strong>max_clusters</strong> (<em>int</em>) – Maximum acceptable number of clusters.
+Must be greater than min_clusters.</p></li>
+<li><p><strong>initial_eps</strong> (<em>float</em>) – Starting value for eps. Must be positive.</p></li>
+<li><p><strong>min_samples</strong> (<em>int</em>) – DBSCAN min_samples parameter. Must be greater than 3.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em>) – Maximum number of iterations. Must be greater than 0.</p></li>
+<li><p><strong>initial_zoom</strong> (<em>float</em>) – Initial zoom factor for adjusting eps. Must be greater than 1.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print detailed progress and results.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>labels: Cluster labels for each point.</p></li>
+<li><p>cluster_count: Number of clusters found (excluding noise).</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, int]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If any parameter constraints are violated</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.create_cluster_dict">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">create_cluster_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#create_cluster_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.create_cluster_dict" title="Link to this definition"></a></dt>
+<dd><p>Creates a structured dictionary representation of clustered point data.</p>
+<p>Organizes points into labeled clusters with metadata for subsequent processing.
+Handles noise points (label = -1) separately from valid clusters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>np.ndarray</em>) – 2D array of shape (N, 2) containing point coordinates.</p></li>
+<li><p><strong>labels</strong> (<em>np.ndarray</em>) – 1D array of cluster labels for each point.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, prints cluster statistics.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>cluster_dict: Dictionary with cluster metadata</p></li>
+<li><p>unique_labels: Set of all unique labels found</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[dict, set] containing</p>
+</dd>
+</dl>
+<dl>
+<dt>Cluster Dictionary Structure:</dt><dd><dl class="simple">
+<dt>label: {</dt><dd><p>‘labels’: [label],       # Cluster identifier(s)
+‘points’: np.ndarray,    # Array of point coordinates
+‘size’: int,             # Number of points in cluster
+‘circle’: None,          # Will store fitted circle params
+‘errors’: None,          # Will store fitting errors
+‘rmse’: None,            # Will store fitting RMSE
+‘valid’: bool            # False for noise (label=-1)</p>
+</dd>
+</dl>
+<p>},</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.filter_fitted_clusters">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">filter_fitted_clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#filter_fitted_clusters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.filter_fitted_clusters" title="Link to this definition"></a></dt>
+<dd><p>Updates the cluster_dict by filtering fitted circles based on quality criteria.
+The validity flag in each cluster is updated based on the result of is_a_good_circle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster_dict</strong> (<em>dict</em>) – Cluster dictionary created by create_cluster_dict.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, prints details during filtering.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated cluster dictionary with the ‘valid’ field set according to the filtering.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If cluster_dict is not a dictionary or contains invalid types.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.compatible_clusters">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">compatible_clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cdict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#compatible_clusters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.compatible_clusters" title="Link to this definition"></a></dt>
+<dd><p>Determines if two clusters are compatible for merging based on their circle fits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cdict</strong> (<em>dict</em>) – Cluster dictionary containing circle fit information</p></li>
+<li><p><strong>i</strong> (<em>int</em>) – First cluster ID</p></li>
+<li><p><strong>j</strong> (<em>int</em>) – Second cluster ID</p></li>
+<li><p><strong>sigma</strong> (<em>float</em>) – Multiplier for error-based compatibility threshold (default: 3.0)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether to print comparison details (default: False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if clusters are compatible for merging, False otherwise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>KeyError</strong> – If either cluster ID is not found in the dictionary</p></li>
+<li><p><strong>ValueError</strong> – If sigma is negative</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.compare_and_merge_clusters">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">compare_and_merge_clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#compare_and_merge_clusters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.compare_and_merge_clusters" title="Link to this definition"></a></dt>
+<dd><p>Merges compatible clusters based on spatial and radial proximity within error bounds.
+Maintains the cluster with the lowest label as valid and marks others as merged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster_dict</strong> (<em>Dict</em><em>[</em><em>int</em><em>, </em><em>Dict</em><em>]</em>) – Dictionary of clusters with keys as cluster
+IDs and values as cluster parameters</p></li>
+<li><p><strong>sigma</strong> (<em>float</em>) – Multiplier for error-based compatibility threshold (must be &gt;= 0)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Enable detailed logging</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated cluster dictionary with merged clusters</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If sigma is negative</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.extract_points">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">extract_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_scatter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cluster'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#extract_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.extract_points" title="Link to this definition"></a></dt>
+<dd><p>Selects points within dynamic boundaries of a fitted circle based on context.</p>
+<p>Implements a dual-mode filtering algorithm that:
+- For ‘cluster’ context: Uses error-bounded selection with fallback scatter
+- For ‘outliers’ context: Uses statistical deviation-based thresholds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sample_points</strong> (<em>np.ndarray</em>) – Input points to filter</p></li>
+<li><p><strong>circle</strong> (<em>np.ndarray</em>) – Circle parameters [cx, cy, r]</p></li>
+<li><p><strong>errors</strong> (<em>np.ndarray</em>) – Circle errors [err_x, err_y, err_r]</p></li>
+<li><p><strong>sigma_threshold</strong> (<em>float</em>) – Multiplier for error boundaries</p></li>
+<li><p><strong>radius_scatter</strong> (<em>float</em>) – Fallback radial scatter</p></li>
+<li><p><strong>context</strong> (<em>str</em>) – Usage context (‘cluster’ or ‘outliers’)</p></li>
+<li><p><strong>identifier</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em><em>]</em>) – Cluster ID or other identifier for verbose</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Show processing details</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Boolean mask of selected points</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – For invalid input shapes or values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.extract_best_ring">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">extract_best_ring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cluster_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_scatter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#extract_best_ring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.extract_best_ring" title="Link to this definition"></a></dt>
+<dd><p>Selects the best-fitting ring using combined center and radius uncertainties.</p>
+<p>The function:
+1. Filters valid clusters from the input dictionary
+2. Extracts points within error boundaries for each cluster
+3. Refits circles to the boundary-selected points
+4. Selects the best candidate based on refined RMSE</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cluster_dict</strong> (<em>Dict</em><em>[</em><em>int</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – Dictionary of clusters with keys as cluster IDs</p></li>
+<li><p><strong>sample_points</strong> (<em>np.ndarray</em>) – All available points (shape [N, 2])</p></li>
+<li><p><strong>sigma_threshold</strong> (<em>float</em>) – Multiplier for error boundaries</p></li>
+<li><p><strong>radius_scatter</strong> (<em>float</em>) – Minimum radial scatter allowance</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Enable detailed progress output</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Points belonging to the best ring (shape [M, 2])</p></li>
+<li><p>All other points (shape [K, 2])</p></li>
+<li><p>Tuple of (refined_circle, refined_errors, refined_rmse) for best ring</p></li>
+<li><p>Cluster ID of the winning ring (or None if no valid rings found)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple containing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.exclude_outliers">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">exclude_outliers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">best_ring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">best_fit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#exclude_outliers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.exclude_outliers" title="Link to this definition"></a></dt>
+<dd><p>Enhanced outlier exclusion using unified extraction methodology with full compatibility.</p>
+<p>Handles both initial processing (without existing other_points) and iterative refinement.
+Maintains consistent return types for easy integration in processing pipelines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>best_ring</strong> (<em>np.ndarray</em>) – Points belonging to current ring (shape [N, 2])</p></li>
+<li><p><strong>best_fit</strong> (<em>Tuple</em><em>[</em><em>np.ndarray</em><em>, </em><em>np.ndarray</em><em>, </em><em>float</em><em>]</em>) – Tuple containing (circle, errors, rmse)</p></li>
+<li><p><strong>other_points</strong> (<em>Optional</em><em>[</em><em>np.ndarray</em><em>]</em>) – Optional array of previously excluded points
+(shape [M, 2])</p></li>
+<li><p><strong>beta</strong> (<em>float</em>) – Number of standard deviations for outlier threshold (&gt;0)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Print refinement details</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>new_ring, updated_other_points, new_fit, outliers</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.calculate_ratii">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">calculate_ratii</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pairs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitted_circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitted_errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#calculate_ratii"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.calculate_ratii" title="Link to this definition"></a></dt>
+<dd><p>Compute error ratios for a given list of fitted pairs, generating detailed messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pairs</strong> (<em>list</em><em> of </em><em>tuples</em>) – Each tuple is (f_idx, tot_error, o_idx, dist).</p></li>
+<li><p><strong>original_circles</strong> (<em>np.ndarray</em>) – Array of original circles [x, y, r].</p></li>
+<li><p><strong>fitted_circles</strong> (<em>np.ndarray</em>) – Array of fitted circles [x, y, r].</p></li>
+<li><p><strong>fitted_errors</strong> (<em>np.ndarray</em>) – Array of errors [err_x, err_y, err_r].</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – The error threshold multiplier.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print messages as they are constructed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>List of error ratios [ratio_x, ratio_y, ratio_r] for each pair</p></li>
+<li><p>List of formatted message strings for each comparison</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple containing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.find_fitting_pairs">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">find_fitting_pairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_best_fit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#find_fitting_pairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.find_fitting_pairs" title="Link to this definition"></a></dt>
+<dd><p>Matches original circles with fitted circles based on geometric proximity
+and relative error thresholds. Computes diagnostic ratios comparing fitted
+parameters with their uncertainties.</p>
+<p>The function assigns each original circle to the closest fitted circle
+whose Euclidean distance is within a given threshold times the total
+fitting uncertainty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>original_circles</strong> (<em>np.ndarray</em>) – Array of original circles with shape (N, 3),</p></li>
+<li><p><strong>[</strong><strong>x</strong> (<em>where each row is</em>) – </p></li>
+<li><p><strong>y</strong> – </p></li>
+<li><p><strong>r</strong><strong>]</strong><strong>.</strong> – </p></li>
+<li><p><strong>new_best_fit</strong> (<em>tuple</em>) – Tuple of (fitted_circles, fitted_errors, _) where:
+- fitted_circles (np.ndarray): Array of circles with shape (N, 3), [x, y, r].
+- fitted_errors (np.ndarray): Array of uncertainties with shape (N, 3),
+[err_x, err_y, err_r].
+- _: Placeholder for optional additional data (e.g., RMSEs), unused here.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – Maximum allowed distance-to-error ratio for a valid match
+(default: 3).</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, print diagnostic messages during the matching process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><dl class="simple">
+<dt>fitted_pairs (np.ndarray): Tuples (orig_idx, dist, fit_idx, err),</dt><dd><p>one per original circle; unmatched ones have dist = np.inf, fit_idx = None.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>good_ratii (np.ndarray): Array of shape (M, 3) containing error ratios</dt><dd><p>[ratio_x, ratio_y, ratio_r] for each successfully matched pair.</p>
+</dd>
+</dl>
+</li>
+<li><p>messages (list of str): Formatted diagnostic strings describing each match.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.analyze_ratii_efficiency">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">analyze_ratii_efficiency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">combined_ratii</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_rings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_seeds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#analyze_ratii_efficiency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.analyze_ratii_efficiency" title="Link to this definition"></a></dt>
+<dd><p>Computes efficiency statistics based on the number of detected rings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>combined_ratii</strong> (<em>np.ndarray</em>) – Array of accepted (good) ratii with shape (N, 3).</p></li>
+<li><p><strong>num_rings</strong> (<em>int</em>) – Number of expected rings per seed.</p></li>
+<li><p><strong>num_seeds</strong> (<em>int</em>) – Number of independent seeds/runs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>total_efficiency (float): Percentage of good rings over total expected.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple containing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.find_nearest_circle">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">find_nearest_circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">circle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#find_nearest_circle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.find_nearest_circle" title="Link to this definition"></a></dt>
+<dd><p>Finds the nearest circle in ‘initial_circles’ to the given ‘circle’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initial_circles</strong> (<em>Union</em><em>[</em><em>np.ndarray</em><em>, </em><em>List</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em><em>]</em>) – A list or NumPy array of circles,
+where each circle is represented as [xc, yc, r].</p></li>
+<li><p><strong>circle</strong> (<em>Union</em><em>[</em><em>np.ndarray</em><em>, </em><em>List</em><em>[</em><em>float</em><em>]</em><em>]</em>) – The circle to find the nearest neighbor for,
+in the same format [xc, yc, r].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>The nearest circle in ‘initial_circles’ as a NumPy array.</p></li>
+<li><p>The index of the nearest circle in ‘initial_circles’.</p></li>
+<li><p>The Euclidean distance between the given circle and the nearest circle.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, int, float]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If ‘initial_circles’ is empty or if ‘circle’ does not have exactly 3 elements.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.evaluate_fit_comparability">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">evaluate_fit_comparability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original_circles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_best_fit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#evaluate_fit_comparability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.evaluate_fit_comparability" title="Link to this definition"></a></dt>
+<dd><p>Evaluates fitted circles against original ground truth using error-normalized comparisons.</p>
+<p>For each fitted circle, finds the closest original circle based on center distance,
+then calculates error-normalized deviations (in sigmas) for center coordinates and radius.
+Uses radius difference as tiebreaker when distances are equal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>original_circles</strong> (<em>np.ndarray</em>) – Array of ground truth circles with shape (N,3)
+where each row contains [x_center, y_center, radius]</p></li>
+<li><p><strong>new_best_fit</strong> (<em>Tuple</em>) – Contains three arrays:
+- fitted_circles (np.ndarray): Array of fitted circles with shape (M,3)
+- fitted_errors (np.ndarray): Array of fitting uncertainties with shape (M,3)
+- _: Placeholder for optional additional data (unused)</p></li>
+<li><p><strong>threshold</strong> (<em>float</em>) – Maximum allowed error-normalized deviation (in sigmas) for
+considering a match valid. Must be &gt; 0. Default: 3</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, prints detailed comparison results. Default: False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>messages (List[str]): Detailed comparison results for each match</p></li>
+<li><p>closest_fitted (np.ndarray): Array of best matching fitted circles</p></li>
+<li><p>ratii_x (np.ndarray): Array of x-center deviation ratios (in sigmas)</p></li>
+<li><p>ratii_y (np.ndarray): Array of y-center deviation ratios (in sigmas)</p></li>
+<li><p>ratii_r (np.ndarray): Array of radius deviation ratios (in sigmas)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple containing</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If threshold is not positive</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.main_procedure_adaptive">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">main_procedure_adaptive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#main_procedure_adaptive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.main_procedure_adaptive" title="Link to this definition"></a></dt>
+<dd><p>Adaptive procedure for ring detection and circle fitting in 2D point rings.</p>
+<p>This function implements a multi-step adaptive approach to:
+1. Generate synthetic ring data
+2. Perform iterative clustering and circle fitting
+3. Validate and refine detected rings
+4. Evaluate results against ground truth</p>
+<dl class="simple">
+<dt>Features:</dt><dd><ul class="simple">
+<li><p>Automatic parameter adjustment</p></li>
+<li><p>Outlier rejection</p></li>
+<li><p>Cluster merging</p></li>
+<li><p>Progressive threshold relaxation</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, enables detailed progress reporting and visualization</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – Random seed for reproducible results</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl>
+<dt>Array containing the fitting quality metrics (ratii) with shape (n, 3) where:</dt><dd><ul class="simple">
+<li><p>ratii[:, 0]: x-coordinate deviations</p></li>
+<li><p>ratii[:, 1]: y-coordinate deviations</p></li>
+<li><p>ratii[:, 2]: radius deviations</p></li>
+</ul>
+<p>Returns empty array if no valid rings found</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Uses adaptive clustering with progressive relaxation</p></li>
+<li><p>Implements multiple validation checks</p></li>
+<li><p>Supports iterative refinement</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="RingDetectionToolkit.ringdetection.main_procedure">
+<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.ringdetection.</span></span><span class="sig-name descname"><span class="pre">main_procedure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/ringdetection.html#main_procedure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.ringdetection.main_procedure" title="Link to this definition"></a></dt>
+<dd><p>Main procedure for generating rings, fitting circles, and evaluating results.</p>
+<p>This function implements the complete workflow for synthetic ring generation,
+iterative circle fitting, and result evaluation against ground truth.</p>
+<dl class="simple">
+<dt>Workflow:</dt><dd><ol class="arabic simple">
+<li><p>Generates synthetic ring data with configurable parameters</p></li>
+<li><p>Performs adaptive clustering and circle fitting</p></li>
+<li><p>Validates and refines detected rings</p></li>
+<li><p>Evaluates results against original circles</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>verbose</strong> (<em>bool</em>) – If True, enables detailed progress reporting and visualization.
+Default: False.</p></li>
+<li><p><strong>seed</strong> (<em>int</em>) – Random seed for reproducible results. Default: 2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Three arrays containing:</dt><dd><ul class="simple">
+<li><p>ratii_x: Array of x-coordinate deviation ratios (found/original)</p></li>
+<li><p>ratii_y: Array of y-coordinate deviation ratios</p></li>
+<li><p>ratii_r: Array of radius deviation ratios</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[np.ndarray, np.ndarray, np.ndarray]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If input parameters are of incorrect type:
+    - verbose not a boolean
+    - seed not an integer</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Uses adaptive clustering with progressive relaxation</p></li>
+<li><p>Implements multiple validation checks at each stage</p></li>
+<li><p>Visualizations are only shown when verbose=True</p></li>
+</ul>
+</dd></dl>
+
 <div class="toctree-wrapper compound">
 </div>
 </section>

@@ -1,7 +1,7 @@
 Ring Detection documentation
 ============================
 
-.. automodule:: ringdetection
+.. automodule:: RingDetectionToolkit.ringdetection
    :members:
    :undoc-members:
    :show-inheritance:
