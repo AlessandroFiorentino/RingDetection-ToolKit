@@ -16,7 +16,10 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install sphinx sphinx_rtd_theme  # + any extras
+        run: | 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install sphinx sphinx_rtd_theme 
 
       - name: Build Sphinx docs
         run: |
