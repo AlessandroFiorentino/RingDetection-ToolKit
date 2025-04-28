@@ -39,7 +39,7 @@ import numpy as np
 from tqdm import tqdm
 
 # Local imports
-from ringdetection import (main_procedure_adaptive, analyze_ratii_efficiency,
+from .ringdetection import (main_procedure_adaptive, analyze_ratii_efficiency,
                             plot_ratii_histograms, calculate_and_print_statistics)
                             #,main_procedure) decomment if you want to run the normal main procedure
 
