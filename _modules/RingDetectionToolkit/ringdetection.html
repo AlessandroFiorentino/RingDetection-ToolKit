@@ -774,13 +774,16 @@
                 <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Cluster </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
 
-    <span class="c1"># plot points (noise first)</span>
+    <span class="c1"># Plot points</span>
     <span class="k">if</span> <span class="n">plt_points</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">cluster_keys</span><span class="p">:</span>
             <span class="n">cluster</span> <span class="o">=</span> <span class="n">cluster_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
-            <span class="n">points</span> <span class="o">=</span> <span class="n">cluster</span><span class="p">[</span><span class="s1">&#39;points&#39;</span><span class="p">]</span>
+            <span class="c1"># Skip plotting points for merged clusters</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">cluster</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="s1">&#39;merged_into&#39;</span> <span class="ow">in</span> <span class="n">cluster</span><span class="p">:</span>
+                <span class="k">continue</span>  <span class="c1"># Skip points from clusters merged into others</span>
 
+            <span class="n">points</span> <span class="o">=</span> <span class="n">cluster</span><span class="p">[</span><span class="s1">&#39;points&#39;</span><span class="p">]</span>
             <span class="n">color</span> <span class="o">=</span> <span class="n">get_color</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">if</span> <span class="n">cluster</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;gray&#39;</span>
             <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Cluster </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">cluster</span><span class="p">[</span><span class="s1">&#39;valid&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;Noise&#39;</span>
             <span class="n">plot_points_base</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
