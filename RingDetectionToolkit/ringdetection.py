@@ -669,13 +669,16 @@ def show_dictionary(cluster_dict: Dict[int, Dict[str, Any]],
                 label = f"Cluster {key}"
             )
 
-    # plot points (noise first)
+    # Plot points
     if plt_points:
         for key in cluster_keys:
             cluster = cluster_dict[key]
 
-            points = cluster['points']
+            # Skip plotting points for merged clusters
+            if not cluster['valid'] and 'merged_into' in cluster:
+                continue  # Skip points from clusters merged into others
 
+            points = cluster['points']
             color = get_color(key) if cluster['valid'] else 'gray'
             label = f"Cluster {key}" if cluster['valid'] else 'Noise'
             plot_points_base(points, color=color, label=label)
