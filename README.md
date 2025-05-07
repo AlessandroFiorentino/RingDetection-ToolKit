@@ -66,7 +66,8 @@ pip install -r requirements.txt
 <details>
 <summary> :rocket: Quick Start </summary>
 
-After installing the requirements, open main.py and remove the dot in: from .ringdetection import. Then:
+After installing the requirements, open main.py and remove the dot in: from .ringdetection import...
+Then:
 
 ```bash
 cd RingDetectionToolkit
