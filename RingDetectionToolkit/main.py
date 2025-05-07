@@ -56,7 +56,7 @@ VERBOSE = True # Controls verbose output; not recommended for large numbers of r
 NUM_RINGS = 3                # Default number of rings to generate
 X_MIN, X_MAX = 0.2, 0.8      # X-coordinate bounds for circle centers
 Y_MIN, Y_MAX = 0.2, 0.8      # Y-coordinate bounds for circle centers
-R_MIN, R_MAX = 0.2, 0.8  # Radius bounds for generated circles
+R_MIN, R_MAX = 0.2, 0.8      # Radius bounds for generated circles
 POINTS_PER_RING = 500        # Points per generated ring
 RADIUS_SCATTER = 0.01        # Scatter level for generated points
 
