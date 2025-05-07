@@ -43,6 +43,11 @@ from .ringdetection import (main_procedure_adaptive, analyze_ratii_efficiency,
                             plot_ratii_histograms, calculate_and_print_statistics)
                             #,main_procedure) decomment if you want to run the normal main procedure
 
+# Local imports, if you want to run locally, decomment the following and comment the previous one
+# from ringdetection import (main_procedure_adaptive, analyze_ratii_efficiency,
+#                             plot_ratii_histograms, calculate_and_print_statistics)
+#                            #,main_procedure)decomment if you want to run the normal main procedure
+
 # ============================ CONSTANTS ============================ #
 DEBUG = False           # Global debug flag for additional output
 VERBOSE = True # Controls verbose output; not recommended for large numbers of rings
