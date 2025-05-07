@@ -2890,6 +2890,11 @@ def main_procedure(verbose: bool = False,
     if not isinstance(seed, (int, np.integer)):
         raise TypeError("seed must be an integer")
 
+    # Initialize lists to store ratii for this run (will be converted to numpy arrays)
+    ratii_x = []
+    ratii_y = []
+    ratii_r = []
+
     # Set the seed for reproducibility
     np.random.seed(seed)
 
@@ -2907,6 +2912,12 @@ def main_procedure(verbose: bool = False,
     sample_points = generate_rings_complete(circles=sample_circles,
                                    points_per_ring=POINTS_PER_RING,
                                    radius_scatter=RADIUS_SCATTER)
+
+    # Decomment if you want to obtain the results in the written document
+    # sample_points = generate_rings_complete(circles=sample_circles,
+    #                                points_per_ring=POINTS_PER_RING,
+    #                                radius_scatter=RADIUS_SCATTER)
+
     original_points = sample_points.copy()
 
     if verbose:
@@ -3070,7 +3081,7 @@ def main_procedure(verbose: bool = False,
             verbose=verbose
         )
 
-        # Stack the ratios into a single (n,3) array
+        # Stack the ratios into a single (n,3) arraygith
         ratii = np.column_stack((r_x, r_y, r_r))
 
         # Print the messages from the evaluate fit comparability
@@ -3083,7 +3094,8 @@ def main_procedure(verbose: bool = False,
 
             if len(closest_fitted) > 0:
                 plot_circles(closest_fitted, title="Best Fitted Circles vs Original Points",
-                         center_as_o=True, hold=False)
+                         label="Fitted Circle", center_as_o=True, hold=False)
+
     else:
         # Return empty array with shape (0,3) if rings are not found
         ratii = np.empty((0, 3))
