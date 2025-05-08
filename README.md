@@ -47,8 +47,6 @@ A **view-only** Google Colab notebook is available here — no setup required, j
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1454qnYQ4ZSxsiQox7dS8wo6We9gcrMfM?usp=sharing)
 
----
-
 
 ---
 
