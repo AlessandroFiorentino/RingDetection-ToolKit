@@ -39,14 +39,9 @@ import numpy as np
 from tqdm import tqdm
 
 # Local imports
-from .ringdetection import (main_procedure_adaptive, analyze_ratii_efficiency,
+from ringdetection import (main_procedure_adaptive, analyze_ratii_efficiency,
                             plot_ratii_histograms, calculate_and_print_statistics)
                             #,main_procedure) decomment if you want to run the normal main procedure
-
-# Local imports, if you want to run locally, decomment the following and comment the previous one
-# from ringdetection import (main_procedure_adaptive, analyze_ratii_efficiency,
-#                             plot_ratii_histograms, calculate_and_print_statistics)
-#                            #,main_procedure)decomment if you want to run the normal main procedure
 
 # ============================ CONSTANTS ============================ #
 DEBUG = False           # Global debug flag for additional output
@@ -56,7 +51,7 @@ VERBOSE = True # Controls verbose output; not recommended for large numbers of r
 NUM_RINGS = 3                # Default number of rings to generate
 X_MIN, X_MAX = 0.2, 0.8      # X-coordinate bounds for circle centers
 Y_MIN, Y_MAX = 0.2, 0.8      # Y-coordinate bounds for circle centers
-R_MIN, R_MAX = 0.2, 0.8      # Radius bounds for generated circles
+R_MIN, R_MAX = 0.165, 0.643  # Radius bounds for generated circles
 POINTS_PER_RING = 500        # Points per generated ring
 RADIUS_SCATTER = 0.01        # Scatter level for generated points
 
