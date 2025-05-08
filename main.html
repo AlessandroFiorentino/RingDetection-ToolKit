@@ -44,8 +44,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#RingDetectionToolkit.main.worker"><code class="docutils literal notranslate"><span class="pre">worker()</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation Guide</a></li>
@@ -76,44 +75,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-RingDetectionToolkit.main">
-<span id="introduction"></span><h1>Introduction<a class="headerlink" href="#module-RingDetectionToolkit.main" title="Link to this heading"></a></h1>
-<p>Ring Detection and Analysis Toolkit — Main Entrypoint</p>
-<p>This script drives the end-to-end workflow for ring detection and evaluation:
-- Repeatedly runs the adaptive clustering + circle-fitting pipeline over many random seeds
-- Offers both linear and multiprocessing modes for speed vs. simplicity trade-offs
-- Computes detection efficiency and normalized deviation metrics across runs
-- Reports timing and performance statistics
-- Generates histograms of the normalized error ratios for visual analysis</p>
-<dl>
-<dt>Usage flags:</dt><dd><p>MULTIPROCESSING = True   → parallel execution with multiprocessing.Pool
-MULTIPROCESSING = False  → serial execution with a single loop</p>
-<p>VERBOSE = True  → detailed per-seed logs (only recommended in normal mode with small N_PR)
-VERBOSE = False → minimal console output (recommended for large N_PR or multiprocessing)</p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<ul class="simple">
-<li><p>In multiprocessing mode, keep VERBOSE=False to avoid interleaved log messages</p></li>
-<li><p>For step-by-step debugging, run (MULTIPROCESSING=False) with VERBOSE=True and a small N_PR</p></li>
-</ul>
-<dl class="py function">
-<dt class="sig sig-object py" id="RingDetectionToolkit.main.worker">
-<span class="sig-prename descclassname"><span class="pre">RingDetectionToolkit.main.</span></span><span class="sig-name descname"><span class="pre">worker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seeed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/RingDetectionToolkit/main.html#worker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RingDetectionToolkit.main.worker" title="Link to this definition"></a></dt>
-<dd><p>Execute the main adaptive procedure for a given seed.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>seed</strong> (<em>int</em>) – The random seed for reproducibility.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array of shape (n, 3) with [r_x, r_y, r_r] for valid rings.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
 </section>
