@@ -69,7 +69,8 @@ pip install -r requirements.txt
 After installing the requirements:
 
 ```bash
-python3 -m RingDetectionToolkit.main
+cd RingDetectionToolkit
+python -m RingDetectionToolkit.main
 ```
 
 - By default, this runs the **serial** workflow (`MULTIPROCESSING = False`) with **verbose output enabled** (`VERBOSE = True`).  
