@@ -77,7 +77,7 @@ FITTING_PAIR_TRESHOLD = 20   # Threshold for matching found-to-original rings
 
 # -------------------- PARAMETERS FOR THE MAIN --------------------#
 # Number of repetitions for the main procedure
-N_PR = 5
+N_PR = 4
 
 # Global constant to set if you want to save
 SAVE_RESULTS = False
