@@ -69,7 +69,6 @@ pip install -r requirements.txt
 After installing the requirements:
 
 ```bash
-cd RingDetectionToolkit
 python -m RingDetectionToolkit.main
 ```
 
