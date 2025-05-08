@@ -12,7 +12,7 @@ import sys
 
 # Adjust the path so it points to the folder containing 'ringdetection.py'
 # If 'docs' and 'ring_detection_dummy' are siblings, you go one level up:
-sys.path.insert(0, os.path.abspath('../RingDetectionToolKit'))
+sys.path.insert(0, os.path.abspath('../RingDetectionToolkit'))
 #sys.path.insert(0, os.path.abspath('..'))
 #sys.path.insert(0, os.path.abspath('RELATIVE_PATH_TO_CODE'))
 
